@@ -1,0 +1,355 @@
+﻿namespace = HRT_italienzug
+#################################
+#
+# Holy Roman Triumph - Italienzug
+#
+#################################
+
+HRT_italienzug.0001 = {
+	type = character_event
+	title = HRT_italienzug.0001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = scope:HRTdeceasedemperor
+				}
+				desc = HRT_italienzug.0001.desc.a
+			}
+			desc = HRT_italienzug.0001.desc.b
+		}
+	}
+	theme = crown
+	left_portrait =	{
+		character = root
+		animation = personality_bold
+	}
+
+	immediate = {
+		title:c_aachen.var:HRT_deceasedemperor ?= { save_scope_as = HRTdeceasedemperor }
+		faith.religious_head.capital_province = { save_scope_as = HRT_hoflocation }
+		play_music_cue = "mx_cue_epic_sacral_moment"
+		add_character_flag = HRT_italienzug
+	}
+
+	option = { #Start Italienzug Activity
+		name = HRT_italienzug.0001.a
+		add_internal_flag = special
+		custom_tooltip = HRT_italienzug.0001.a.tooltip
+		open_view_data = {
+			view = activity_list_detail_host_window
+			data = activity_type:activity_HRT_italienzug
+			player = root
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = { #Raise Army
+		name = HRT_italienzug.0001.b
+		custom_tooltip = HRT_italienzug.0001.b.tooltip
+		open_view_data = military
+	}
+	option = { #Not now
+		name = HRT_italienzug.0001.c
+	}
+}
+
+#Travel Start
+HRT_italienzug.0002 = {
+	type = character_event
+	title = HRT_italienzug.0002.t
+	desc = HRT_italienzug.0002.desc
+	theme = travel
+
+	left_portrait = root
+
+	
+	trigger = {
+		is_available_travelling = yes
+		is_landed = yes
+		exists = involved_activity
+		involved_activity = {
+			has_activity_type = activity_HRT_italienzug
+		}
+	}
+
+	immediate = {
+		play_music_cue = mx_cue_travel_start
+	}
+
+	option = { 
+		name = HRT_italienzug.0002.a
+		add_prestige = 10
+	}
+	option = { 
+		name = HRT_italienzug.0002.b
+		add_piety = 10
+	}
+}
+
+#Arrival
+HRT_italienzug.0003 = {
+	type = activity_event
+	title = HRT_italienzug.0003.t
+	desc = HRT_italienzug.0003.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:host
+		animation = bold
+	}
+
+	#right_portrait = {
+	#	character = scope:pope
+	#	animation = personality_zealous
+	#	trigger = {
+	#		exists = scope:pope
+	#	}
+	#}
+
+	immediate = {
+		faith.religious_head = { save_scope_as = pope }
+		scope:activity = {
+			activity_location = {
+				save_scope_as = location
+			}
+		}
+	}
+	
+	option = {
+		name = HRT_italienzug.0003.a
+		if = {
+			limit = {
+				scope:activity = {
+					has_activity_option = {
+						category = HRT_italienzug_expedition_type
+						option = HRT_italienzug_expedition_type_small
+					}
+                }
+			}
+			add_piety = minor_piety_gain
+			add_prestige = minor_prestige_gain
+            dynasty = {
+				add_dynasty_prestige = { 10 25 }
+			}
+		}
+        else_if = {
+			limit = {
+				scope:activity = {
+					has_activity_option = {
+						category = HRT_italienzug_expedition_type
+						option = HRT_italienzug_expedition_type_normal
+					}
+                }
+			}
+			add_piety = medium_piety_gain
+			add_prestige = medium_prestige_gain
+            dynasty = {
+				add_dynasty_prestige = { 25 50 }
+			}
+		}
+        else_if = {
+			limit = {
+				scope:activity = {
+					has_activity_option = {
+						category = HRT_italienzug_expedition_type
+						option = HRT_italienzug_expedition_type_grand
+					}
+                }
+			}
+			add_piety = medium_piety_gain
+			add_prestige = major_prestige_gain
+            dynasty = {
+				add_dynasty_prestige = { 50 100 }
+			}
+		}
+        custom_tooltip = HRT_italienzug.0003.a.tooltip
+        trigger_event = {
+			id = HRT_italienzug.0004
+			days = { 4 12 }
+		}
+	}
+}
+
+# Coronation Ceremony
+HRT_italienzug.0004 = {
+	type = activity_event
+	title = HRT_italienzug.0004.t
+	desc = HRT_italienzug.0004.desc
+	theme = faith
+
+	left_portrait = {
+		character = scope:pope
+		animation = wedding_priest
+		trigger = {
+			exists = scope:pope
+		}
+	}
+	
+	right_portrait = {
+		character = scope:host
+		animation = throne_room_kneel_1
+	}
+
+	immediate = {
+		scope:host = { save_scope_as = emperor }
+		faith.religious_head = { save_scope_as = pope }
+		add_trait = HRT_emperor
+		if = {
+			limit = {
+				NOR = {
+					has_title = title:e_hre
+					has_claim_on = title:e_hre
+				}
+			}
+			add_unpressed_claim = title:e_hre
+		}
+		remove_character_flag = HRT_italienzug
+		set_variable = {
+			name = HRT_crowned_by
+			value = scope:pope
+		}
+	}
+	
+	option = {
+		name = HRT_italienzug.0004.a
+        if = {
+			limit = {
+				has_activity_intent = HRT_glory_intent
+			}
+			add_prestige = major_prestige_gain
+			stress_impact = {
+                zealous = minor_stress_impact_loss
+                humble = minor_stress_impact_loss
+            }
+		}
+		else_if = {
+			limit = {
+				has_activity_intent = HRT_submission_intent
+			}
+			add_piety = major_piety_gain
+			stress_impact = {
+                arrogant = minor_stress_impact_loss
+                ambitious = minor_stress_impact_loss
+            }
+		}
+	}
+
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {
+					root = scope:host
+				}
+				scope:activity = {
+					hidden_effect = { skip_activity_phase = yes }
+				}
+			}
+		}
+	}
+}
+
+#Returned home
+HRT_italienzug.0009 = {
+	type = character_event
+	title = HRT_italienzug.0009.t
+	desc = HRT_italienzug.0009.desc
+	theme = crown
+	left_portrait =	{
+		character = root
+		animation = personality_bold
+	}
+
+	
+	trigger = {
+		has_trait = HRT_emperor
+	}
+
+	immediate = {
+		root.capital_province = { save_scope_as = location }
+	}
+
+	# Ok
+	option = { 
+		name = HRT_italienzug.0009.a
+	}
+}
+
+#####################
+#Fired on_army_enter_province
+#Hidden first event fires for the owner of the army.
+#root = owner of the army
+#scope:army = the army itself.
+HRT_italienzug.0011 = {
+	hidden = yes
+	
+	trigger = {
+		scope:army = {
+			exists = army_commander
+			army_commander = {
+				has_character_flag = HRT_italienzug
+				save_temporary_scope_as = HRT_army_commander
+			}
+		}
+		exists = scope:HRT_army_commander.faith.religious_head.capital_province
+		location = scope:HRT_army_commander.faith.religious_head.capital_province
+	}
+
+	immediate = {
+		scope:army = {
+			location = { save_scope_as = HRT_coronation_location }
+			army_commander = { trigger_event = HRT_italienzug.0012 }
+		}
+	}
+}
+
+#Arrival
+HRT_italienzug.0012 = {
+	type = character_event
+	title = HRT_italienzug.0004.t
+	desc = HRT_italienzug.0004.desc
+	theme = faith
+
+	right_portrait = {
+		character = scope:pope
+		animation = wedding_priest
+		trigger = {
+			exists = scope:pope
+		}
+	}
+	
+	left_portrait = {
+		character = root
+		animation = throne_room_kneel_1
+	}
+
+	immediate = {
+		root = { save_scope_as = emperor }
+		faith.religious_head = { save_scope_as = pope }
+		add_trait = HRT_emperor
+		if = {
+			limit = {
+				NOR = {
+					has_title = title:e_hre
+					has_claim_on = title:e_hre
+				}
+			}
+			add_unpressed_claim = title:e_hre
+		}
+		remove_character_flag = HRT_italienzug
+		set_variable = {
+			name = HRT_crowned_by
+			value = scope:pope
+		}
+	}
+
+	option = {
+		name = HRT_italienzug.0004.a
+		add_piety = minor_piety_gain
+		add_prestige = minor_prestige_gain
+        dynasty = {
+			add_dynasty_prestige = { 10 25 }
+		}
+	}
+}

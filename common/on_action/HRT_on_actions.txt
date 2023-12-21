@@ -1,0 +1,112 @@
+﻿on_game_start = {
+	on_actions = {
+		HRT_setup_on_actions
+	}
+}
+
+HRT_setup_on_actions = {
+	effect = {
+		set_global_variable = {
+			name = HRT_is_loaded
+			value = yes
+		}
+		if = { #Error Destroyer 4000
+			limit = {
+				exists = global_var:HRT_is_loaded
+			}
+			# Do nothing
+		}
+	}
+}
+
+on_game_start_after_lobby = {
+	on_actions = {
+		HRT_setup_after_game_start_on_actions
+	}
+}
+
+HRT_setup_after_game_start_on_actions = {
+	effect = {
+		if = {
+			limit = { game_start_date = 867.1.1 }
+			character:30228 ?= { #Louis II of Italy Introduction Event
+				create_story = HRT_emperor_story
+				trigger_event = HRT.0001
+			}
+		}
+		else_if = {
+			limit = { exists = title:e_hre.holder }
+			title:e_hre.holder = {
+				add_character_flag = HRT_italienzug
+				create_story = HRT_emperor_story
+				trigger_event = HRT.0002 #Generic Introduction
+			}
+		}
+
+		#TODO HRT_grant_roman_kingship = yes #after creation of HRE
+
+		#every_kingdom = {
+		#	if = {
+		#		limit = {
+		#			is_titular = no
+		#			title_capital_county = {
+		#				geographical_region = HRT_core_territory
+		#			}
+		#		}
+		#		title:c_aachen = {
+		#			add_to_variable_list = {
+		#				name = HRT_core_kingdoms
+		#				target = prev
+		#			}
+		#		}
+		#	}
+		#}
+
+		# Get Total Count of Heartland Counties
+		title:c_aachen = {
+			set_variable = {
+				name = HRT_core_territory
+				value = 0
+			}
+			every_county_in_region = {
+				region = HRT_core_territory
+				prev = {
+					change_variable = {
+						name = HRT_core_territory
+						add = 1
+					}
+				}
+			}
+		}
+	}
+}
+
+# A title is destroyed
+# root = the holder before destruction
+# scope:landed_title = the title that is being destroyed
+# Does *not* provide scope:transfer_type
+on_title_destroyed = {
+	events = {
+		HRT.0006 # HRE title is destroyed
+	}
+}
+
+# A title is transferred to a new character
+# root = the new holder
+# scope:title = the title that changes hands
+# scope:previous_holder = previous holder. Might be dead
+on_title_gain = {
+	events = {
+		HRT.0007 # HRE restored but not by current emperor
+	}
+}
+
+# A title is lost by a character
+# root = the old holder
+# scope:title = the title that changes hands
+# scope:new_holder = new holder.
+on_title_lost = {
+	events = {
+		HRT.0008 # Emperor holds no kingdom pre HRE-formation
+	}
+}

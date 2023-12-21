@@ -1,0 +1,7 @@
+﻿HRT_core_territory = {
+	regions = {
+		world_europe_west_germania
+		custom_northern_italy
+		custom_burgundy
+	}
+}

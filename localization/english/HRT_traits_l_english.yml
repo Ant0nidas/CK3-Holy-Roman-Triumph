@@ -1,0 +1,10 @@
+﻿l_english:
+ trait_HRT_emperor_name: "Crowned by the Pope"
+ trait_HRT_emperor_pope: "Crowned by [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstNameNoTooltip]"
+ HRT_emperor_desc: "This character has been recognized and formally crowned as the rightful ruler of the Holy Roman Empire."
+ HRT_emperor_pope_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been recognized and formally crowned by [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstName] as the rightful ruler of the Holy Roman Empire."
+ HRT_emperor_character_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been recognized and formally crowned by the [ROOT.GetCharacter.GetFaith.ReligiousHeadName] as the rightful ruler of the Holy Roman Empire."
+ 
+ trait_HRT_roman_king: "King of the Romans"
+ HRT_roman_king_desc: "This character has been recognized and formally crowned as the rightful ruler of the Holy Roman Empire."
+ HRT_roman_king_character_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been recognized and formally crowned by the Pope as the rightful ruler of the Holy Roman Empire."

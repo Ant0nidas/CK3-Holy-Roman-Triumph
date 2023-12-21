@@ -1,0 +1,48 @@
+﻿HRT_emperor = {
+	category = fame
+	
+	random_creation = 0
+	
+	monthly_prestige = 0.2
+	monthly_piety = 0.2
+	clergy_opinion = 10
+	vassal_opinion = 5
+	
+	shown_in_ruler_designer = no
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_HRT_emperor_name
+			}
+			triggered_desc = {
+				trigger = {
+					exists = var:HRT_crowned_by
+				}
+				desc = trait_HRT_emperor_pope
+			}
+			desc = trait_HRT_emperor_name
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = HRT_emperor_desc
+			}
+			triggered_desc = {
+                trigger = {
+                    exists = var:HRT_crowned_by
+                }
+                desc = HRT_emperor_pope_desc
+            }
+			desc = HRT_emperor_character_desc
+		}
+	}
+}

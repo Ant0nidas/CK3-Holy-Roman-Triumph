@@ -1,0 +1,91 @@
+﻿on_travel_plan_start = {
+	on_actions = {
+		HRT_on_travel_plan_start
+	}
+}
+HRT_on_travel_plan_start = {
+	trigger = {
+		involved_activity ?= { has_activity_type = activity_HRT_italienzug }
+	}
+	effect = {
+		current_travel_plan = {
+			set_variable = {
+				name = HRT_italienzug
+				value = yes
+			}
+			travel_plan_owner = {
+				add_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				limit = { is_male = yes }
+				add_character_flag = wear_armor
+			}
+		}
+	}
+	events = {
+		HRT_italienzug.0002	# Italienzug Start
+	}
+}
+
+on_travel_plan_complete = {
+	on_actions = {
+		HRT_on_travel_plan_complete
+	}
+}
+
+HRT_on_travel_plan_complete = {
+	trigger = {
+		current_travel_plan = { has_variable = HRT_italienzug }
+	}
+	effect = {
+		current_travel_plan = {
+			travel_plan_owner = {
+				remove_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				remove_character_flag = wear_armor
+			}
+		}
+	}
+	events = {
+		HRT_italienzug.0009 #Arrived back home
+	}
+}
+
+
+on_travel_plan_abort = {
+	on_actions = {
+		HRT_on_travel_plan_abort
+	}
+}
+
+HRT_on_travel_plan_abort = {
+	trigger = {
+		current_travel_plan = { has_variable = HRT_italienzug }
+	}
+	effect = {
+		current_travel_plan = {
+			travel_plan_owner = {
+				remove_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				remove_character_flag = wear_armor
+			}
+		}
+	}
+}
+
+# called for armies whenever they enter a province
+# root is the owner of the army
+# scope:army is the army
+on_army_enter_province = {
+	on_actions = {
+		HRT_on_army_enter_province
+	}
+}
+
+HRT_on_army_enter_province = {
+	events = {
+		HRT_italienzug.0011
+	}
+}

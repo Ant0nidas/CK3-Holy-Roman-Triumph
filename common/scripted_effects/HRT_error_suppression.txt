@@ -1,0 +1,12 @@
+﻿fix_variable_error = {# ERROR = KEY
+    if = {
+        limit = {
+            exists = var:$ERROR$
+            var:$ERROR$ = flag:$ERROR$
+        }
+        set_variable = {
+            name = $ERROR$
+            value = flag:$ERROR$
+        }
+    }
+}

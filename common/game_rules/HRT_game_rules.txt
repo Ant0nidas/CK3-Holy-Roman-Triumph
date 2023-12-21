@@ -1,0 +1,9 @@
+﻿HRT_authority_gains = {
+	default = HRT_authority_default
+
+	HRT_authority_default = { }
+
+	HRT_authority_one_and_a_half = { }	
+
+	HRT_authority_twice = { }	
+}

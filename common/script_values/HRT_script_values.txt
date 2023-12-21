@@ -1,0 +1,102 @@
+﻿#by Rylock - Historicity Mod
+HRT_unification_ai_score_value = {
+	value = 1
+	if = {
+		limit = {
+			any_in_list = {
+				list = target_titles
+				this = title:d_julich
+			}
+		}
+		multiply = 40
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					scope:attacker.capital_county.title_province = { geographical_region = world_europe_west_germania }
+					any_in_list = {
+						list = target_titles
+						tier = tier_duchy
+						title_capital_county.title_province = { geographical_region = world_europe_west_germania }
+					}
+				}
+				AND = {
+					scope:attacker.capital_county.title_province = { geographical_region = custom_northern_italy }
+					any_in_list = {
+						list = target_titles
+						tier = tier_duchy
+						title_capital_county.title_province = { geographical_region = custom_northern_italy }
+					}
+				}
+				AND = {
+					scope:attacker.capital_county.title_province = { geographical_region = custom_carolingian_francia }
+					any_in_list = {
+						list = target_titles
+						tier = tier_duchy
+						title_capital_county.title_province = { geographical_region = custom_carolingian_francia }
+					}
+				}
+			}
+		}
+		multiply = 20
+	}
+	else_if = {
+		limit = {
+			any_in_list = {
+				list = target_titles
+				tier = tier_duchy
+				title_capital_county.title_province = { geographical_region = world_europe_west_germania }
+			}
+		}
+		multiply = 10
+	}
+	else_if = {
+		limit = {
+			OR = {
+				any_in_list = {
+					list = target_titles
+					tier = tier_duchy
+					title_capital_county.title_province = { geographical_region = custom_northern_italy }
+				}
+				any_in_list = {
+					list = target_titles
+					tier = tier_duchy
+					title_capital_county.title_province = { geographical_region = custom_burgundy }
+				}
+			}
+		}
+		multiply = 5
+	}
+	scope:attacker = {
+		if = {
+			limit = { dynasty = scope:defender.dynasty }
+			multiply = 0.5
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { faith = scope:defender.faith }
+					has_relation_rival = scope:defender
+				}
+			}
+			multiply = 5
+		}
+	}
+}
+
+HRT_unification_authority_value = {
+	value = 60
+	if = {
+		limit = { NOT = { exists = title:e_hre.holder } }
+		multiply = 0.5
+	}
+}
+
+HRT_demand_fealty_interaction_authority_value = {
+	value = 80
+	if = {
+		limit = { NOT = { exists = title:e_hre.holder } }
+		value = 50
+	}
+}

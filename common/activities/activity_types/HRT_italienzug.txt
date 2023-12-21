@@ -1,0 +1,1190 @@
+﻿activity_HRT_italienzug = {
+	is_shown = {
+		has_character_flag = HRT_italienzug
+		is_landed = yes
+		exists = faith.religious_head.capital_province
+		trigger_if = {
+			limit = {
+				is_ai = yes
+			}
+			is_at_war = no
+			gold >= 50
+		}
+	}
+
+	can_start_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+	}
+
+	is_valid = {
+		NOT = {
+			has_variable = activity_invalidated
+		}
+		scope:host = {
+			#If you don't have a capital to return to, don't bother
+			exists = capital_province
+			is_capable_adult = yes
+			is_imprisoned = no
+			is_landed = yes
+			NOT = { is_incapable = yes }
+		}
+		# Converting mid-activity is a big no-no.
+		scope:activity = {
+			OR = {
+				NOT = { has_variable = starting_faith }
+				scope:host.faith = var:starting_faith
+			}
+		}
+	}
+
+	on_invalidated = {
+		# Host becomes unlanded
+		if = {
+			limit = {
+				scope:host = { is_landed = no }
+			}
+			scope:activity = {
+				activity_type = { save_scope_as = activity_type }
+			}
+			every_attending_character = {
+				trigger_event = activity_system.0320
+			}
+		}
+		if = {
+			limit = {
+				scope:host = { is_incapable = yes }
+			}
+			scope:activity = {
+				activity_type = { save_scope_as = activity_type }
+			}
+			scope:host = {
+				trigger_event = activity_system.0330
+			}
+			every_attending_character = {
+				limit = { NOT = { this = scope:host } }
+				trigger_event = activity_system.0331
+			}
+		}
+	}
+
+	on_host_death = {
+		scope:activity = {
+			set_variable = {
+				name = activity_invalidated
+			}
+		}
+		scope:host = {
+			current_travel_plan = {
+				every_entourage_character = { set_location_to_default = yes }
+			}
+		}
+	}
+
+	is_location_valid = {
+		this = scope:host.faith.religious_head.capital_province #I hope this is Rome
+	}
+
+	province_description = {
+		triggered_desc = {
+			trigger = {
+				barony = title:b_roma
+			}
+			desc = activity_HRT_italienzug_province_rome_desc
+		}
+		triggered_desc = {
+			trigger = {
+				NOT = { barony = title:b_roma }
+			}
+			desc = activity_HRT_italienzug_province_desc
+		}
+	}
+
+	ai_will_do = {
+		value = 1000
+	}
+
+	ai_check_interval = 1
+
+	ai_will_select_province = {
+		value = 100
+	}
+
+	###################
+	# PARAMETERS
+	###################
+
+	is_grand_activity = yes
+
+	is_single_location = yes
+	
+	province_filter = all
+
+	cost = {
+		gold = {
+			add = {
+				add = {
+					value = 50
+					desc = tour_base_cost
+				}
+				add = {
+					value = 50
+					multiply = activity_cost_scale_by_era
+					subtract = 50
+					desc = activity_cost_scale_by_era_desc
+				}
+				# Some people get one free.
+				if = {
+					limit = { factor_zero_if_entitled_to_freebie_activity_trigger = yes }
+					multiply = 0
+				}
+				if = {
+					limit = {
+						dynasty ?= { has_dynasty_perk = ep2_activities_legacy_1 }
+					}
+					subtract = {
+						value = 50
+						multiply = ep2_activities_legacy_1_pilgrimages_discount_value
+						desc = ep2_activities_legacy_track
+					}
+				}
+			}
+		}
+	}
+	
+	ui_predicted_cost = {
+		gold = {
+			# Calculate average cost of traveling to Pope's capital (Rome preferrably)
+			faith.religious_head.capital_province = { 
+				# Calculate a summation of the costs to travel to Pope's capital
+				# MUST BE SYNCED WITH THE PHASE COST
+				#Tier 1
+				if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_small
+						"squared_distance(root.capital_province)" <= squared_distance_medium
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 0.2
+					}
+				}
+				#Tier 2: Praha -> Cologne
+				else_if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_medium
+						"squared_distance(root.capital_province)" <= squared_distance_large
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 0.4
+					}
+				}
+				#Tier 3
+				else_if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_large
+						"squared_distance(root.capital_province)" <= squared_distance_huge
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 0.6
+					}
+				}
+				#Tier 4
+				else_if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_huge
+						"squared_distance(root.capital_province)" <= squared_distance_almost_massive
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 0.8
+					}
+				}
+				#Tier 5
+				else_if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_almost_massive
+						"squared_distance(root.capital_province)" <= squared_distance_massive
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 1
+					}
+				}
+				#Tier 6: Klingenberg -> Jerusalem
+				else_if = {
+					limit = {
+						"squared_distance(root.capital_province)" > squared_distance_massive
+						"squared_distance(root.capital_province)" <= squared_distance_monstrous
+					}
+					add = {
+						value = root.medium_gold_value 
+						multiply = 1.2
+					}
+				}
+				#Tier 7: Klingenberg -> Kanchipuram
+				else_if = {
+					limit = { "squared_distance(root.capital_province)" > squared_distance_monstrous }
+					add = {
+						value = root.medium_gold_value 
+						multiply = 1.5
+					}
+				}
+			}
+
+			add = { # Base cost, scaled by era
+				value = 50
+				multiply = activity_cost_scale_by_era
+			}
+			
+			# Options 
+			add = { # Expedition Option 
+				value = 20 # Appropriate Cost
+				add = 60 # Substantial Cost
+				add = 180 # Grand Cost
+				# Scale option costs by era
+				multiply = activity_cost_scale_by_era
+				# Divide by the number of option levels to get an average option cost
+				divide = 3
+			}
+
+			# Some people get one free.
+			if = {
+				limit = { factor_zero_if_entitled_to_freebie_activity_trigger = yes }
+				multiply = 0
+			}
+
+			if = {
+				limit = {
+					dynasty ?= { has_dynasty_perk = ep2_activities_legacy_1 }
+				}
+				subtract = {
+					value = root.pilgrimage_base_cost
+					multiply = ep2_activities_legacy_1_pilgrimages_discount_value
+					desc = ep2_activities_legacy_track
+				}
+			}
+			min = minor_gold_value
+			
+			# Make it a multiple of 5 (rounded up)
+			divide = 5
+			ceiling = yes 
+			multiply = 5
+		}
+	}
+
+	###################
+	# OPTIONS
+	###################
+
+	options = {
+		#########
+		# EXPEDITION OPTION
+		#########
+		HRT_italienzug_expedition_type = {
+			HRT_italienzug_expedition_type_small = {
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = 20
+								desc = tour_entourage_small
+							}
+							add = {
+								value = 20
+								multiply = activity_cost_scale_by_era
+								subtract = 20
+								desc = activity_cost_scale_by_era_desc
+							}
+							# Some people get one free.
+							if = {
+								limit = { factor_zero_if_entitled_to_freebie_activity_trigger = yes }
+								multiply = 0
+							}
+						}
+					}
+				}
+				
+				travel_entourage_selection = {
+					weight = tour_entourage_weight_value
+					max = 15
+					invite_rule_order = 1
+				}
+
+				ai_will_do = {
+					value = 0
+					add = { #Base amount
+						value = 30
+					}
+					if = {
+						limit = {
+							has_trait = greedy
+						}
+						add = 30
+					}
+					if = {
+						limit = {
+							OR = {
+								has_trait = lazy
+								has_trait = temperate
+								has_trait = content
+							}
+						}
+						add = 15
+					}
+					if = {
+						limit = {
+							has_trait = humble
+						}
+						add = 10
+					}
+					if = {
+						limit = {
+							gold <= major_gold_value
+						}
+						add = 100
+					}
+				}
+			}
+			HRT_italienzug_expedition_type_normal = {
+				default = yes
+				travel_entourage_selection = {
+					weight = tour_entourage_weight_value
+					max = 20
+					ai_max = 15
+					invite_rule_order = 1
+				}
+
+				on_start = {
+					scope:host = {
+						add_prestige = medium_prestige_gain
+					}
+				}
+				is_valid = {
+					gold > minor_gold_value
+					custom_tooltip = {
+						text = more_than_5_courtiers
+						any_courtier_or_guest = { count > 5 }
+					}
+				}
+
+				ai_will_do = {
+					value = 50
+				}
+
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = 60
+								desc = tour_entourage_normal
+							}
+							add = {
+								value = 60
+								multiply = activity_cost_scale_by_era
+								subtract = 60
+								desc = activity_cost_scale_by_era_desc
+							}
+							# Some people get one free.
+							if = {
+								limit = { factor_zero_if_entitled_to_freebie_activity_trigger = yes }
+								multiply = 0
+							}
+						}
+					}
+				}
+			}
+			HRT_italienzug_expedition_type_grand = {
+				is_valid = {
+					gold > medium_gold_value
+					custom_tooltip = {
+						text = more_than_10_courtiers
+						any_courtier_or_guest = { count > 10 }
+					}
+				}
+				
+				#Entourage option grabbing sodding everyone suitable from court, + every grabbable rando in the duchy and maybe a few extra.
+				travel_entourage_selection = {
+					weight = {
+						value = tour_entourage_weight_value
+						add = pilgrimage_entourage_base_set_weighting_value
+						add = pilgrimage_entourage_extras_set_weighting_value
+						add = pilgrimage_entourage_sodding_everyone_set_weighting_value
+					}
+					max = 40
+					ai_max = 20
+					invite_rule_order = 1
+				}
+
+				on_start = {
+					scope:host = {
+						add_prestige = major_prestige_gain
+					}
+				}
+
+				ai_will_do = {
+					value = 0
+					add = { #Base amount
+						value = 30
+					}
+					if = {
+						limit = {
+							OR = {
+								has_trait = arrogant
+								has_trait = ambitious
+							}
+						}
+						add = 30
+					}
+				}
+
+				cost = {
+					gold = {	
+						add = {
+							add = {
+								value = 180
+								desc = tour_entourage_grand
+							}
+							add = {
+								value = 180
+								multiply = activity_cost_scale_by_era
+								subtract = 180
+								desc = activity_cost_scale_by_era_desc
+							}
+							# Some people get one free.
+							if = {
+								limit = { factor_zero_if_entitled_to_freebie_activity_trigger = yes }
+								multiply = 0
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	###################
+	# PHASES
+	###################
+
+	phases = {
+		HRT_italienzug_coronation_phase = {
+			is_predefined = yes
+			
+			on_phase_active = {
+				if = {
+					limit = {
+						this = scope:host
+					}
+					trigger_event = HRT_italienzug.0003 #Arrival
+				}
+			}
+
+			on_end = {
+
+			}
+		}
+	}
+
+	###################
+	# GUEST HANDLING
+	###################
+
+	allow_zero_guest_invites = yes
+
+	guest_invite_rules = {
+		rules = {
+			# Relations.
+			2 = activity_invite_rule_lovers
+			2 = activity_invite_rule_rivals_if_appropriate
+
+			# MP 
+			6 = activity_invite_mp
+		}
+		defaults = {
+			3 = activity_invite_rule_extended_family
+			2 = activity_invite_rule_knights
+			1 = activity_invite_rule_friends
+			1 = activity_invite_rule_close_family
+			3 = activity_invite_rule_courtiers
+			4 = activity_invite_rule_guests
+			1 = activity_invite_spouses
+		}
+	}
+
+	can_be_activity_guest = {
+		is_adult = yes
+		in_diplomatic_range = scope:host
+	}
+
+	max_guests = 100
+
+	host_intents = {
+		intents = { HRT_glory_intent HRT_submission_intent }
+		default = HRT_submission_intent
+	}
+
+	guest_intents = {
+		intents = { HRT_witness_intent }
+		default = HRT_witness_intent
+	}
+
+	guest_join_chance = {
+		base = 10
+		base_activity_modifier = yes
+
+		# Scripted Modifiers
+		activity_guest_shared_ai_accept_modifier = yes 
+	}
+
+	# Guests bring knights & close family
+	travel_entourage_selection = {
+		weight = {
+			value = standard_travel_entourage_additions
+			if = {
+				limit = {
+					is_spouse_of = scope:owner
+					is_available = yes
+				}
+				add = 200
+			}
+			if = {
+				limit = {
+					bannable_serving_diarch_trigger = no
+					OR = {
+						is_knight_of = scope:owner
+						scope:owner.court_position:champion_court_position ?= this
+					}
+					trigger_if = {
+						limit = { is_landed = yes }
+						highest_held_title_tier = tier_barony
+					}
+					is_available = yes
+				}
+				add = 100
+			}
+			if = {
+				limit = {
+					bannable_serving_diarch_trigger = no
+					is_landed = no
+					is_close_family_of = scope:owner
+					is_available = yes
+				}
+				add = 50
+			}
+		}
+
+		max = 18
+		invite_rule_order = 1
+	}
+	
+	###################
+	# ACTIVITY-SPECIFIC PULSES
+	###################
+
+	#on_enter_travel_state = {
+	#	scope:host.current_travel_plan = {
+	#		travel_plan_owner = {
+	#			add_character_flag = forced_knight_armor
+	#		}
+	#		every_entourage_character = {
+	#			limit = { is_male = yes }
+	#			add_character_flag = wear_armor
+	#		}
+	#	}
+	#}
+	#on_start = {
+	#	scope:host.current_travel_plan = {
+	#		travel_plan_owner = {
+	#			add_character_flag = forced_knight_armor
+	#		}
+	#		every_entourage_character = {
+	#			limit = { is_male = yes }
+	#			add_character_flag = wear_armor
+	#		}
+	#	}
+	#}
+
+	on_leave_travel_state = {
+		scope:host.current_travel_plan = {
+			travel_plan_owner = {
+				remove_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				remove_character_flag = wear_armor
+			}
+		}
+	}
+
+	on_enter_passive_state = {
+		scope:host.current_travel_plan = {
+			travel_plan_owner = {
+				remove_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				remove_character_flag = wear_armor
+			}
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = { this = scope:host }
+			create_character_memory = {
+				type = HRT_italienzug_host_memory
+			}
+			scope:host = {
+				HRT_italienzug_completed_log_entry_effect = yes
+			}
+		}
+		else = {			
+			create_character_memory = {
+				type = HRT_italienzug_guest_memory
+				participants = {
+					host = scope:host
+				}
+			}
+		}
+		scope:host.current_travel_plan = {
+			travel_plan_owner = {
+				add_character_flag = forced_knight_armor
+			}
+			every_entourage_character = {
+				limit = {
+					is_male = yes
+				}
+				add_character_flag = wear_armor
+			}
+		}
+	}
+
+	###################
+	# GRAPHICS
+	###################
+
+	# Travel
+	background = { # Bridge
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				is_riverside_province = yes
+				geographical_region = world_europe
+				OR = {
+					terrain = farmlands
+					terrain = plains
+					terrain = mountains
+					terrain = hills
+				}
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_bridge.dds"
+		environment = "environment_travel_bridge"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+	
+	background = { # Farmland, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				terrain = farmlands
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_farm.dds"
+		environment = "environment_travel_farmlands"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { # Farmland, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				terrain = farmlands
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/farms.dds"
+		environment = "environment_event_farms"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #Desert, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_desert_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_desert.dds"
+		environment = "environment_travel_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+	background = { #Desert, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_desert_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/desert.dds"
+		environment = "environment_event_bp1_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+
+	background = { #forest snowy
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location ?= { hunt_snowy_forest_trigger = yes }
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_hunt_snowy_forest.dds"
+		environment = "environment_hunt_snowy_forest"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+
+	background = { #forest_pine
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_forest_pine_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/forest_pine.dds"
+		environment = "environment_event_forest_pine"
+		ambience = "event:/SFX/Events/Backgrounds/coniferous_forest_day"
+	}
+
+	background = { #forest
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_forest_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/forest.dds"
+		environment = "environment_event_forest"
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #mountains, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_mountains_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_mountains.dds"
+		environment = "environment_travel_mountain_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+	background = { #mountains, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_mountains_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/mountains.dds"
+		environment = "environment_event_mountains"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+
+	background = { #steppe, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_steppe_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_steppe.dds"
+		environment = "environment_travel_steppe_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/steppe_day"
+	}
+	background = { #steppe, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_steppe_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/steppe.dds"
+		environment = "environment_event_steppe"
+		ambience = "event:/SFX/Events/Backgrounds/steppe_day"
+	}
+
+	background = { #drylands (formerly desert)
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_drylands_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/drylands.dds"
+		environment = "environment_event_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+
+	background = { #wetlands
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_wetlands_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_wetlands.dds"
+		environment = "environment_event_bp1_wetlands" 
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #jungle
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_wilderness_jungle_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_jungle.dds"
+		environment = "environment_event_bp1_jungle"
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #plains, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_plains_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_hills.dds"
+		environment = "environment_travel_hills_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { #plains, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_plains_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_plains.dds"
+		environment = "environment_event_bp1_plains"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #hills, settled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_hills_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_hills.dds"
+		environment = "environment_travel_hills_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { #hills, unsettled
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				graphical_hills_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_hills.dds"
+		environment = "environment_event_bp1_hills"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #sea
+		trigger = {
+			NOT = { scope:host.location = scope:activity.activity_location }
+			scope:host.location = {
+				is_sea_province = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/fp1_ocean.dds"
+		environment = "environment_event_fp1_ocean"
+		ambience = "event:/DLC/FP1/SFX/Events/event_ocean_longship"
+	}
+	# End Travel
+	background = {
+		texture = "gfx/interface/illustrations/event_scenes/fp2_temple.dds"
+		environment = "environment_event_fp2_temple"
+		ambience = "event:/SFX/Events/Backgrounds/temple_christian"
+	}
+
+	window_characters = {
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						has_activity_option = {
+							category = HRT_italienzug_expedition_type
+							option = HRT_italienzug_expedition_type_grand
+						}
+					}
+					every_attending_character = {
+						limit = {
+							scope:host.location = scope:activity.activity_location
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				animation = idle
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				every_attending_character = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					add_to_list = characters
+				}
+			}
+
+			scripted_animation = {
+				animation = idle
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						has_activity_option = {
+							category = HRT_italienzug_expedition_type
+							option = HRT_italienzug_expedition_type_grand
+						}
+					}
+					every_attending_character = {
+						limit = {
+							NOT = {
+								scope:host.location = scope:activity.activity_location
+							}
+							has_character_flag = wear_armor
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				animation = jockey_walk
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				every_attending_character = {
+					limit = {
+						NOT = {
+							scope:host.location = scope:activity.activity_location
+						}
+						has_character_flag = wear_armor
+					}
+					add_to_list = characters
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				animation = jockey_walk
+			}
+		}
+		
+		host = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					scope:host = { add_to_list = characters }
+				}
+			}
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character = {
+							has_activity_intent = HRT_submission_intent
+						}
+					}
+					animation = { personality_zealous }
+				}
+				triggered_animation = {
+					trigger = {
+						scope:character = {
+							has_activity_intent = HRT_glory_intent
+						
+						}
+					}
+					animation = { personality_bold }
+				}
+			}
+		}
+		
+		travel_host = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						NOT = {
+							scope:host.location = scope:activity.activity_location
+						}
+					}
+					scope:host = {
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				animation = jockey_walk
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				every_attending_character = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					add_to_list = characters
+				}
+			}
+
+			scripted_animation = {
+				animation = idle
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						has_activity_option = {
+							category = HRT_italienzug_expedition_type
+							option = HRT_italienzug_expedition_type_grand
+						}
+					}
+					every_attending_character = {
+						limit = {
+							scope:host.location = scope:activity.activity_location
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				animation = idle
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				every_attending_character = {
+					limit = {
+						NOT = {
+							scope:host.location = scope:activity.activity_location
+						}
+						has_character_flag = wear_armor
+					}
+					add_to_list = characters
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				animation = jockey_walk
+			}
+		}
+
+		retainer = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						has_activity_option = {
+							category = HRT_italienzug_expedition_type
+							option = HRT_italienzug_expedition_type_grand
+						}
+					}
+					every_attending_character = {
+						limit = {
+							NOT = {
+								scope:host.location = scope:activity.activity_location
+							}
+							has_character_flag = wear_armor
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				animation = jockey_walk
+			}
+		}
+	}
+}
