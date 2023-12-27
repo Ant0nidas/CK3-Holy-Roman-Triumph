@@ -117,7 +117,6 @@ types HRT_button_authority_types {
 		{
 			effectname = "NoHighlight"
 		}
-		#tooltip = "HRT_button_authority_tt"
 	
 		state = {
 			name = _mouse_hierarchy_enter
@@ -144,7 +143,6 @@ types HRT_button_authority_types {
 			text_label_center = {
 				visible = "[LessThan_CFixedPoint(GetPlayer.MakeScope.ScriptValue('HRT_authority_progressbar_value'),'(CFixedPoint)10')]"
 				position = { 11 63 }
-				#text = "[FixedPointToInt(GetPlayer.MakeScope.ScriptValue('HRT_authority_progressbar_value'))|L]"
 				text = "[GetPlayer.MakeScope.ScriptValue('HRT_authority_progressbar_value')|L]"
 				fontsize = 36
 				using = Font_Size_Big

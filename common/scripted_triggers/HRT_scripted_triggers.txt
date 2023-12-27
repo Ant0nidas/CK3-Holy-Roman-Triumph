@@ -40,11 +40,18 @@ HRT_is_emperor_trigger = {
 HRT_is_involved_trigger = {
 	is_landed = yes
 	OR = {
+		HRT_is_emperor_trigger = yes
 		any_realm_province = { geographical_region = HRT_core_territory }
 		AND = {
 			exists = title:e_hre.holder
 			is_vassal_of = title:e_hre.holder
 		}
-		HRT_is_emperor_trigger = yes
+		any_neighboring_top_liege_realm_owner = {
+			any_realm_province = { geographical_region = HRT_core_territory }
+			AND = {
+				exists = title:e_hre.holder
+				is_vassal_of = title:e_hre.holder
+			}
+		}
 	}
 }

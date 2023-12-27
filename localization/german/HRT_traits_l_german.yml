@@ -1,0 +1,6 @@
+﻿l_german:
+ trait_HRT_emperor_name: "Vom Papst gekrönt"
+ trait_HRT_emperor_pope: "Von [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstNameNoTooltip] gekrönt"
+ HRT_emperor_desc: "Dieser Charakter wurde anerkannt und formell als der rechtmäßige Herrscher des Heiligen Römischen Reiches gekrönt."
+ HRT_emperor_pope_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] wurde von [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstName] als der rechtmäßige Herrscher des Heiligen Römischen Reiches anerkannt und formell gekrönt."
+ HRT_emperor_character_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] wurde vom [ROOT.GetCharacter.GetFaith.ReligiousHeadName] als der rechtmäßige Herrscher des Heiligen Römischen Reiches anerkannt und formell gekrönt."

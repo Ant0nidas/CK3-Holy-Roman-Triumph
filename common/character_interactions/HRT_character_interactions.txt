@@ -60,7 +60,7 @@
 	ai_max_reply_days = 10
 
 	ai_accept = {
-		base = 50
+		base = -50
 		# MAIN
 		# Heretic/Infidel modifier.
 		# Tier difference modifier.
@@ -269,6 +269,21 @@
 						scope:recipient.sub_realm_size >= 10
 					}
 					add = -100
+				}
+				if = {
+					limit = {
+						scope:recipient = {
+							any_held_title = {
+								OR = {
+									this = title:k_papal_state
+									this = title:k_france
+									this = title:k_denmark
+									this = title:k_venice
+								}
+							}
+						}
+					}
+					add = -200
 				}
 			}
 		}

@@ -28,8 +28,8 @@
 		ordered_HRT_candidati = {
 			order_by = HRT_imperator_score
 			position = 0
+			save_temporary_scope_as = HRT_new_emperor
 			create_story = HRT_emperor_story
-			faith.religious_head.capital_province ?= { save_scope_as = HRT_hoflocation }
 			trigger_event = {
 				id = HRT_italienzug.0001
 				days = { 7 14 }
@@ -109,12 +109,6 @@ HRT_update_window_effect = {
 						add_to_variable_list = {
 							name = HRT_electors
 							target = prev
-						}
-						if = { #Error Destroyer 4001
-							limit = {
-								has_variable_list = HRT_electors
-							}
-							# Do nothing
 						}
 					}
 				}
@@ -338,6 +332,7 @@ HRT_clear_variables_effect = {
 		remove_variable = HRT_missing_3_gui
 		remove_variable = HRT_missing_expectatus_gui
 		remove_variable = HRT_missing_imperator_gui
+		clear_variable_list = HRT_electors
 	}
 	#GUI
 	remove_global_variable = HRT_window_is_open

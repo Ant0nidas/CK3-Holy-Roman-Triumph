@@ -1,0 +1,9 @@
+﻿l_german:
+ HRT_unification_cb:0 "Imperiale Vereinigung"
+ HRT_UNIFICATION_NAME:0 "Eroberung aller kaiserlichen Provinzen"
+ HRT_UNIFICATION_WAR_NAME:1 "$ORDER$ [ATTACKER.GetPrimaryTitle.GetPrefix]-[DEFENDER.GetPrimaryTitle.GetAdjective] Vereinigungskrieg"
+ HRT_UNIFICATION_WAR_NAME_BASE:0 "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+ HRT_UNIFICATION_SPECIFIC_NAME:0 "Konsolidierung des kaiserlichen Territoriums" # von [TITLE.GetNameNoTier]
+ HRT_UNIFICATION_WAR_SPECIFIC_NAME:1 "$ORDER$ [ATTACKER.GetPrimaryTitle.GetPrefix]-[DEFENDER.GetPrimaryTitle.GetAdjective] Vereinigungskrieg"
+ HRT_UNIFICATION_WAR_SPECIFIC_NAME_BASE:0 "[ATTACKER.GetPrimaryTitle.GetAdjective][DEFENDER.GetPrimaryTitle.GetName]"
+ HRT_unification_authority_req: "Sie benötigen mindestens #V [EmptyScope.ScriptValue('HRT_unification_authority_value')|0]#! [HRT_imperial_authority|E]"

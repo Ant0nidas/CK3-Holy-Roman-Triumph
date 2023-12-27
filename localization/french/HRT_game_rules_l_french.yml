@@ -1,0 +1,8 @@
+﻿l_french:
+ rule_HRT_authority_gains: "Imperial Authority Gain"
+ setting_HRT_authority_default: "Default"
+ setting_HRT_authority_default_desc: "Gain Imperial Authority at the default rate."
+ setting_HRT_authority_one_and_a_half: "1.5x"
+ setting_HRT_authority_one_and_a_half_desc: "Gain Imperial Authority at 1.5x rate."
+ setting_HRT_authority_twice: "2x"
+ setting_HRT_authority_twice_desc: "Gain Imperial Authority at 2x rate."

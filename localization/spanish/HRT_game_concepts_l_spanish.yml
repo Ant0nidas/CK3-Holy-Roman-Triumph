@@ -1,0 +1,42 @@
+﻿l_spanish:
+ game_concept_HRT_imperial_authority: "Imperial Authority"
+ game_concept_HRT_imperial_authority_desc: "Imperial Authority represents the amount of control the Emperor exerts over his [vassals|E]. Authority is needed to issue [HRT_imperial_edicts|E] and proclaim [HRT_imperial_directives|E] within the Holy Roman Empire."
+ 
+ game_concept_HRT_imperial_authority_change: "Monthly Authority Change"
+ game_concept_HRT_imperial_authority_change_desc: "The rate at which you gain or lose [HRT_imperial_authority|E]. Capped at +5 and -10 per month before [HRT_imperial_edict|E] effects."
+ 
+ game_concept_HRT_imperial_territory: "Imperial Territory"
+ game_concept_HRT_imperial_territory_desc: "The Imperial Core Territories include the regions of #bold West Germania#! (including Saxony, Frisia, Lotharingia, Bavaria, East Francia, Bohemia and Pomerania), #bold Northern Italy#! and #bold Burgundy#!."
+ 
+ game_concept_HRT_imperial_edict: "Imperial Edict"
+ game_concept_HRT_imperial_edicts: "Imperial Edicts"
+ game_concept_HRT_imperial_edict_desc: "Imperial Edicts are temporary decrees issued by the Emperor to swiftly address specific challenges or seize strategic opportunities within the Holy Roman Empire. Each Edict, crafted with [HRT_imperial_authority|E], can provide immediate benefits ranging from military enhancements to economic boosts.\nHowever, their temporary nature demands strategic foresight, as the effects are fleeting and often come with trade-offs. Wise use of these Imperial Edicts can greatly bolster the Empire's strength and stability in times of need."
+ 
+ game_concept_HRT_imperial_directive: "Imperial Directive"
+ game_concept_HRT_imperial_directives: "Imperial Directives"
+ game_concept_HRT_imperial_directive_desc: "The Proclamation of Imperial Directives echo the historic practices of Holy Roman Emperors like Otto the Great and Frederick Barbarossa, who exercised their authority to issue decisive commands addressing the realm's critical issues. These directives could range from military mobilizations, as seen in Otto I's campaigns to expand and secure the Empire's boundaries, to significant legal and administrative reforms, akin to those undertaken by Frederick I to consolidate imperial power and streamline governance. Such proclamations were pivotal in shaping the Empire's political, military, and cultural landscape, reflecting the Emperor's ability to direct the course of history with a single, authoritative decree."
+ 
+ #game_concept_HRT_imperial_resolution: "Imperial Resolution"
+ #game_concept_HRT_imperial_resolutions: "Imperial Resolutions"
+ #game_concept_HRT_imperial_resolution_desc: "Imperial Resolutions reflect the decisive actions of historical Holy Roman Emperors, embodying their strategic judgment and leadership in critical moments. Such resolutions, liek the crucial domestic policies enacted by rulers like Frederick II, were instrumental in navigating the complex interplay of political, religious, and social dynamics of the Empire. These resolutions represent the Emperor's capacity to shape the Empire's destiny, balancing the diverse interests of its territories and peoples. Each resolution is a testament to the Emperor's acumen in steering the course of the Empire through the annals of history."
+ 
+ game_concept_HRT_real_emperor_score: "Current Emperor Score"
+ game_concept_HRT_real_emperor_score_desc: "The Emperor Score below is a prospective estimation of the score this character inherits upon the death of their father, the Emperor."
+ 
+ game_concept_HRT_constrained_reach: "Constrained Reach"
+ game_concept_HRT_constrained_reach_desc: "The Emperor currently holds limited influence beyond his domain. Central authority is yet to be fully established or recognized across the broader realm. Restore the Holy Roman Empire to remove this malus."
+ 
+ game_concept_HRT_vassal_count: "Vassal Count"
+ game_concept_HRT_vassal_count_desc: "[duke|E] and [king|E] [vassals|E] contribute to this score."
+ 
+ game_concept_HRT_uncrowned: "Uncrowned"
+ game_concept_HRT_uncrowned_desc: "The Emperor has yet to commence the [HRT_italienzug|E] and get formally crowned and legitimized by the Pope."
+ 
+ game_concept_HRT_italienzug: "Italienzug"
+ game_concept_HRT_italienzug_desc: "An Italienzug (also known as #italic Romfahrt#! or #italic Romzug#!, Latin #italic expeditio italica#!) was the expedition undertaken by an elected [HRT_king_of_the_romans|E] to be crowned Holy Roman emperor in City of Rome."
+ 
+ game_concept_HRT_king_of_the_romans: "King of the Romans"
+ game_concept_HRT_king_of_the_romans_desc: "King of the Romans (Latin: #italic Rex Romanorum#!; German: #italic König der Römer#!) was the title used by the king of Germany following his election by the princes ([electors|E]) from the reign of Henry II (1002–1024) onward.\nThe title originally referred to any German king between his election and royal coronation in Germany until he was crowned Holy Roman Emperor by the Pope. The title was also used to designate the successor to the throne elected during the lifetime of a sitting Emperor."
+ 
+ game_concept_HRT_princely_elective: "$princely_elective_succession_law$"
+ game_concept_HRT_princely_elective_desc: "$princely_elective_succession_law_effects$"

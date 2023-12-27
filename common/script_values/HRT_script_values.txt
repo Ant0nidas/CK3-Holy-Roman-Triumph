@@ -100,3 +100,8 @@ HRT_demand_fealty_interaction_authority_value = {
 		value = 50
 	}
 }
+
+#HRT_authority_half_value = {
+#	value = title:c_aachen.var:HRT_emperor.var:HRT_authority
+#	multiply = 0.5
+#}

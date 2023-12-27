@@ -28,6 +28,19 @@ HRT_italienzug.0001 = {
 	immediate = {
 		title:c_aachen.var:HRT_deceasedemperor ?= { save_scope_as = HRTdeceasedemperor }
 		faith.religious_head.capital_province = { save_scope_as = HRT_hoflocation }
+
+		if = {
+			limit = {
+				is_ai = yes
+				scope:HRTdeceasedemperor.primary_title.holder ?= {
+					is_ai = no
+				}
+			}
+			scope:HRTdeceasedemperor.primary_title.holder = {
+				trigger_event = HRT.0009
+			}
+		}
+
 		play_music_cue = "mx_cue_epic_sacral_moment"
 		add_character_flag = HRT_italienzug
 	}

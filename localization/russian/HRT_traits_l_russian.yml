@@ -1,4 +1,4 @@
-﻿l_english:
+﻿l_russian:
  trait_HRT_emperor_name: "Crowned by the Pope"
  trait_HRT_emperor_pope: "Crowned by [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstNameNoTooltip]"
  HRT_emperor_desc: "This character has been recognized and formally crowned as the rightful ruler of the Holy Roman Empire."
