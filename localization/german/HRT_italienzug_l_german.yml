@@ -1,0 +1,89 @@
+﻿l_german:
+
+ #Activity
+ activity_HRT_italienzug: "Italienzug"
+ activity_HRT_italienzug_desc: "In der langjährigen Tradition des Heiligen Römischen Reiches stellt der Italienzug eine Reise sowohl von spiritueller als auch politischer Bedeutung dar. Wenn ein neuer Kaiser gewählt wird, um das Reich zu führen, geschieht dies nicht nur durch den Willen der Fürsten und des Adels, sondern durch göttliches Recht, bestätigt durch die höchste Autorität im Christentum: den Papst."
+ activity_HRT_italienzug_selection_tooltip: "Reise auf den alten Straßen, durchquere Länder reich an Geschichte und Kultur, um die ewige Stadt zu erreichen und an der Krönungszeremonie teilzunehmen\n\nErwartete Belohnungen:\n$EFFECT_LIST_BULLET$[piety_i|E] [piety|E]\n$EFFECT_LIST_BULLET$[prestige_i|E] [prestige|E]\n$EFFECT_LIST_BULLET$[dynasty_prestige_i|E] [dynasty_prestige|E]"
+  
+ activity_HRT_italienzug_host_desc: "$BULLET_WITH_TAB$Erhalte zufällige Mengen an [piety_i|E][piety|E], [prestige_i|E][prestige|E] und [dynasty_prestige_i|E][dynasty_prestige|E]"
+ activity_HRT_italienzug_guest_desc: "$BULLET_WITH_TAB$Erhalte zufällige Mengen an [piety_i|E][piety|E] und [prestige_i|E][prestige|E]"
+ 
+ activity_HRT_italienzug_province_rome_desc: "#P Die Ewige Stadt#!\nDurch Jahrtausende der Geschichte getränkt, steht diese alte Hauptstadt als Leuchtfeuer des Glaubens und der Macht. Einst das Herz eines riesigen Imperiums, dient sie jetzt als spirituelles Epizentrum des Christentums. Ihre geschichtsträchtigen Straßen und großartigen Basiliken sind Zeugen unzähliger Krönungen und heiliger Zeremonien. Für einen designierten Kaiser des Heiligen Römischen Reiches ist Rom nicht nur ein Ziel, sondern ein Zeugnis göttlichen Schicksals. Hier gekrönt zu werden bedeutet, von Gott, dem Papst und dem gesamten Christentum anerkannt zu sein."
+ activity_HRT_italienzug_province_desc: "Eine Bastion des Glaubens und der Tradition. Obwohl nicht die antike Hauptstadt Roms, ist diese verehrte Stadt aufgrund des Wohnsitzes des Papstes zum temporären spirituellen Herz des Christentums geworden. Ihre Bedeutung wird durch ihre Rolle bei kaiserlichen Krönungen und heiligen Zeremonien unterstrichen. Für einen designierten Kaiser des Heiligen Römischen Reiches ist die Reise hierher eine Pilgerfahrt der göttlichen Bestätigung. In dieser Stadt gekrönt zu werden bedeutet, den Segen Gottes, des Papstes und des gesamten christlichen Reiches zu erlangen." # Fallback-Option
+
+ TRAVEL_NAME_FOR_activity_HRT_italienzug: "[Character.GetFirstNamePossessiveNoTooltip] $activity_HRT_italienzug$"
+
+ activity_HRT_italienzug_destination_selection: ""
+ activity_HRT_italienzug_guest_help_text: "$activity_HRT_italienzug$"
+ activity_HRT_italienzug_predicted_cost: "Die Kosten des Italienzugs hängen von den [activity_options|E] ab, die Sie wählen."
+ activity_HRT_italienzug_conclusion_desc: "Während die letzten Momente des Italienzugs zu Ende gehen und das Echo unserer historischen Reise sich legt, blicken wir mit erneuertem Zweck und Hoffnung nach vorne. Möge diese altehrwürdige Tradition als Zeugnis unseres Engagements und unserer Einheit dienen, um eine stärkere Bindung für die Zukunft des Reiches zu schmieden."
+
+ HRT_italienzug_expedition_type: "Expedition"
+ HRT_italienzug_expedition_type_small: "Kleine Expedition"
+ HRT_italienzug_expedition_type_small_desc: "$EFFECT_LIST_BULLET$ Sie bringen geschickte Ritter, nahe Familienmitglieder und vielleicht vertraute Berater mit\n$EFFECT_LIST_BULLET$ Gewinnen Sie [piety_i|E] #V [GetPlayer.MakeScope.ScriptValue('minor_piety_gain')]#!\n$EFFECT_LIST_BULLET$ Gewinnen Sie [prestige_i|E] #V [GetPlayer.MakeScope.ScriptValue('minor_prestige_gain')]#!\n$EFFECT_LIST_BULLET$ Erhalten Sie eine winzige Menge an [dynasty_prestige_i|E] [dynasty_prestige|E]\n\n#weak Die bevorstehende Reise ist unvorhersehbar und erfordert Vorsicht. Während uns der Ehrgeiz antreibt, muss die Klugheit unsere Schritte leiten.#!"
+ 
+ HRT_italienzug_expedition_type_normal: "Bescheidene Expedition"
+ HRT_italienzug_expedition_type_normal_desc: "$EFFECT_LIST_BULLET$ Sie bringen auch Helfer, Spezialisten und interessierte Verbündete mit\n$EFFECT_LIST_BULLET$ Gewinnen Sie [piety_i|E] #V [GetPlayer.MakeScope.ScriptValue('minor_piety_gain')]#!\n$EFFECT_LIST_BULLET$ Gewinnen Sie [prestige_i|E] #V [GetPlayer.MakeScope.ScriptValue('minor_prestige_gain')]#!\n$EFFECT_LIST_BULLET$ Erhalten Sie eine kleine Menge an [dynasty_prestige_i|E] [dynasty_prestige|E]\n\n#weak Eine Expedition dieser Größe erfordert ein Zeichen des Engagements, sowohl im Geiste als auch in der Zahl. Jede Hand zählt.#!"
+ 
+ HRT_italienzug_expedition_type_grand: "Große Expedition"
+ HRT_italienzug_expedition_type_grand_desc: "$EFFECT_LIST_BULLET$ Jeder verfügbare [character|E] bei [court|E] begleitet Sie\n$EFFECT_LIST_BULLET$ Gewinnen Sie [piety_i|E] #V [GetPlayer.MakeScope.ScriptValue('medium_piety_gain')]#!\n$EFFECT_LIST_BULLET$ Gewinnen Sie [prestige_i|E] #V [GetPlayer.MakeScope.ScriptValue('major_prestige_gain')]#!\n$EFFECT_LIST_BULLET$ Erhalten Sie eine mittlere Menge an [dynasty_prestige_i|E] [dynasty_prestige|E]\n\n#weak Sich in Grandeur auf den Weg zu machen, ist ein Statement an die Welt. Der Ruhm unseres Reiches soll allen bekannt sein.#!"
+
+ activity_window_character_retainer: "Retainer\n[Character.GetShortUINameNoTooltip|U]"
+
+ HRT_italienzug_coronation_phase: "Coronation Ceremony"
+ HRT_italienzug_coronation_phase_desc: "Amidst the solemn chants, the crown is placed, marking a new reign and destiny."
+
+ HRT_submission_intent_header: "Submission:"
+ HRT_submission_intent: "Submission"
+ HRT_submission_intent_desc: "Your attendance signifies a humble acknowledgment of the Pope's spiritual authority. Gain more [piety_i|E] [piety|E]. Lose extra [stress_loss_i|E][stress|E] if you are [GetTrait('humble').GetName( GetNullCharacter )] or [GetTrait('zealous').GetName( GetNullCharacter )]."
+ HRT_glory_intent_header: "Display of Might:"
+ HRT_glory_intent: "Display of Might"
+ HRT_glory_intent_desc: "Your presence is a testament to your power and grandeur for all to behold. Gain more [prestige_i|E] [prestige|E]. Lose extra [stress_loss_i|E][stress|E] if you are [GetTrait('arrogant').GetName( GetNullCharacter )] or [GetTrait('ambitious').GetName( GetNullCharacter )]."
+ HRT_witness_intent_header: "Witness:"
+ HRT_witness_intent: "Witness"
+ HRT_witness_intent_desc: "Being a part of this historic moment, you bear witness to the dawn of a new reign."
+
+ HRT_italienzug_completed_log_title: "Completed the Italienzug"
+ HRT_italienzug_completed_log: "[CHARACTER.GetShortUIName|U] completed the Italienzug"
+
+ # Memories
+ HRT_italienzug_host_memory: "peformed an [owner.GetHerHis] [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_host_memory_first_perspective: "I peformed an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_host_memory_second_perspective: "you peformed an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_host_memory_third_perspective: "[owner.GetName] peformed an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_guest_memory: "joined [host.GetTitledFirstName] to perform an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_guest_memory_first_perspective: "I joined [host.GetTitledFirstName] to perform an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_guest_memory_second_perspective: "you joined [host.GetTitledFirstName] to perform an [GetActivityType('activity_HRT_italienzug').GetName]"
+ HRT_italienzug_guest_memory_third_perspective: "[owner.GetName] joined [host.GetTitledFirstName] to perform an [GetActivityType('activity_HRT_italienzug').GetName]"
+
+ HRT_italienzug_result_gained_piety: "Gained [piety_i|E][piety|E]"
+ HRT_italienzug_result_gained_prestige: "Gained [prestige_i|E][prestige|E]"
+ HRT_italienzug_result_gained_dynasty_prestige: "Gained [dynasty_prestige_i][dynasty_prestige|E]"
+ 
+ # Events
+ HRT_italienzug.0001.t: "The New Emperor"
+ HRT_italienzug.0001.desc.a: "In the wake of Emperor [HRTdeceasedemperor.GetFirstNameNicknamed]'s passing, a void was left at the very heart of Christendom. Throughout the lands of the Holy Roman Empire, whispers of your ascending prowess have not gone unheard. With profound reverence the herald proclaims that they have chosen you to bear the weighty mantle of Emperor. Such an honor, however, comes with its sacred traditions. It is now incumbent upon you to undertake the time-honored Italienzug, a journey to the heart of Rome, where the Pope himself awaits to crown you in a grand coronation ceremony at the very steps of St. Peter's Basilica."
+ HRT_italienzug.0001.desc.b: "Throughout the lands of the Holy Roman Empire, whispers of your ascending prowess have not gone unheard. With profound reverence the herald proclaims that they have chosen you to bear the weighty mantle of Emperor. Such an honor, however, comes with its sacred traditions. It is now incumbent upon you to undertake the time-honored Italienzug, a journey to the heart of Rome, where the Pope himself awaits to crown you in a grand coronation ceremony at the very steps of St. Peter's Basilica."
+ HRT_italienzug.0001.a: "The time has finally come. I will leave immediately!"
+ HRT_italienzug.0001.a.tooltip: "You start the [GetActivityType( 'activity_HRT_italienzug' ).GetName]\n\n#emphasis Historical Context:#! An Italienzug (also known as #italic Romfahrt#! or #italic Romzug#!, Latin #italic expeditio italica#!) was the expedition undertaken by an elected [HRT_king_of_the_romans|E] to be crowned Holy Roman Emperor in City of Rome."
+ HRT_italienzug.0001.b: "Muster the expeditionary forces!"
+ HRT_italienzug.0001.b.tooltip: "Raise your army and march to [HRT_hoflocation.GetName] to get crowned!"
+ HRT_italienzug.0001.c: "Maybe this is not the right time..."
+ 
+ HRT_italienzug.0002.t: "The Expedition Begins"
+ HRT_italienzug.0002.desc: "I can almost feel the weight of the crown over my head already, but it is far from burdensome: I feel reinvigorated by the prospect of finally becoming Emperor. Thinking about my new responsibilities as an anointed ruler fills me with trepidation."
+ HRT_italienzug.0002.a: "I shall be the greatest Emperor ever!"
+ HRT_italienzug.0002.b: "This is a sign to stop slouching and take my work seriously."
+ 
+ HRT_italienzug.0003.t: "Advent in [location.GetName]"
+ HRT_italienzug.0003.desc: "Only a few more days before I am crowned Emperor before God and all my subjects. [location.GetName] already hosts all my distinguished guests, both vassals and foreign dignitaries come to bear witness to this fundamental moment of my reign. Such a lavish ceremony with so prestigious guests is a true spectacle to behold even amongst royalty."
+ HRT_italienzug.0003.a: "It will never be soon enough."
+ HRT_italienzug.0003.a.tooltip: "All [family_members|E] attending the ceremony gain a random amount of [prestige|E] and [piety|E] depending on their [virtues|E] and [sins|E], and the [dynasty_prestige_level|E] of your [dynasty|E]"
+ 
+ HRT_italienzug.0004.t: "Coronation Ceremony"
+ HRT_italienzug.0004.desc: "I kneel before [pope.GetTitledFirstName] as a host of vassals surrounds us in complete silence, as the Pope begins praying:\n"Hear our prayer, Lord, and those of your servant [emperor.GetFirstName]. Look, Almighty God, with a serene gaze on this, your glorious servant, [emperor.GetFirstName]..."\nas he places a golden crown upon my head and proclaim me Emperor of the Romans by grace of God, and protector of all Christendom.\n"Through whom honor and glory are yours through infinite ages of ages. Amen.""
+ HRT_italienzug.0004.a: "I am finally and truly Emperor."
+ 
+ HRT_italienzug.0009.t: "Return to [location.GetName]"
+ HRT_italienzug.0009.desc: "With the ceremony finally concluded and every guest returned home, I can resume my duties as Emperor: now that I have officially received the blessing of the [ROOT.Char.GetFaith.GetName] Church, the legitimacy of my divine right to rule is beyond doubt."
+ HRT_italienzug.0009.a: "Excellent."

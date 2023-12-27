@@ -38,6 +38,7 @@ HRT_authority_change_value = {
 		add = HRT_authority_grand_tour_bonus
 		multiply = HRT_authority_constrained_reach
 		multiply = HRT_authority_uncrowned_malus
+		multiply = HRT_authority_imprisoned_malus
 		multiply = HRT_authority_edict_modifier
 		#Game Rule
 		multiply = HRT_authority_game_rule_bonus_one_and_a_half
@@ -87,10 +88,18 @@ HRT_authority_vassal_bonus = {
 	value = 0
 	add = var:HRT_authority_vassals_bonus_var
 	multiply = authority_gain_per_vassal_multiplier
+	if = {
+		limit = { has_title = title:e_hre }
+		multiply = 0.3
+	}
 }
 HRT_authority_loss_waged_vassal_wars_malus = {
 	value = var:HRT_authority_vassals_war_var
 	multiply = authority_loss_per_waged_vassal_war_multiplier
+	if = {
+		limit = { has_title = title:e_hre }
+		multiply = 1.3
+	}
 	min = -10
 }
 HRT_authority_infidel_malus = {
@@ -150,6 +159,10 @@ HRT_authority_held_castle_bonus = {
 HRT_authority_ally_bonus = {
 	value = 0
 	every_ally = { add = 0.5 }
+	if = {
+		limit = { has_title = title:e_hre }
+		multiply = 0.5
+	}
 	max = 3
 }
 
@@ -241,6 +254,16 @@ HRT_authority_uncrowned_malus = {
 			NOT = { has_trait = HRT_emperor }
 		}
 		subtract = 0.5
+	}
+}
+
+HRT_authority_imprisoned_malus = {
+	value = 1
+	if = {
+		limit = {
+			is_imprisoned = yes
+		}
+		subtract = 1
 	}
 }
 
@@ -435,6 +458,14 @@ HRT_authority_uncrowned_malus_gui = {
 	value = {
 		title:c_aachen.var:HRT_emperor = {
 			add = HRT_authority_uncrowned_malus
+		}
+	}
+}
+
+HRT_authority_imprisoned_malus_gui = {
+	value = {
+		title:c_aachen.var:HRT_emperor = {
+			add = HRT_authority_imprisoned_malus
 		}
 	}
 }

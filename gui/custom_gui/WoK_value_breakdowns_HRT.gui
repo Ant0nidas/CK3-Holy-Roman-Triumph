@@ -238,6 +238,11 @@ types WOKValueBreakdown_HRT  {
                     blockoverride "value"    {text = "HRT_authority_uncrowned_malus_value"}
 				}
 				wok_cardinal_breakdown_box_HRT  = {
+					visible = "[LessThan_CFixedPoint(TopScope.ScriptValue('HRT_authority_imprisoned_malus_gui'),'(CFixedPoint)1')]"
+                    blockoverride "text"     {text = HRT_authority_imprisoned_malus} 
+                    blockoverride "value"    {text = "HRT_authority_child_malus_value"} #-100%
+				}
+				wok_cardinal_breakdown_box_HRT  = {
 					visible = "[LessThan_CFixedPoint(TopScope.ScriptValue('HRT_authority_child_malus_gui'),'(CFixedPoint)1')]"
                     blockoverride "text"     {text = HRT_authority_child_malus} 
                     blockoverride "value"    {text = "HRT_authority_child_malus_value"}

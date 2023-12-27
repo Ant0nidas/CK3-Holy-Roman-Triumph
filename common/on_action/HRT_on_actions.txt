@@ -81,6 +81,68 @@ HRT_setup_after_game_start_on_actions = {
 	}
 }
 
+# Called every Jan 1st
+# Root does not exist
+yearly_global_pulse = {
+	on_actions = {
+		HRT_yearly_maintenance_pulse
+	}
+}
+
+HRT_yearly_maintenance_pulse = {
+	trigger = {
+		title:c_aachen = {
+			NOT = { has_variable = HRT_dismantled }
+		}
+		OR = {
+			AND = {
+				exists = title:e_hre.holder
+				title:e_hre.holder = {
+					HRT_is_emperor_trigger = no
+				}
+			}
+			title:c_aachen.var:HRT_emperor = {
+				is_alive = no
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = { exists = title:e_hre.holder }
+			title:e_hre.holder = {
+				create_story = HRT_emperor_story
+				if = {
+					limit = {
+						NOT = { has_trait = HRT_emperor }
+					}
+					trigger_event = {
+						id = HRT_italienzug.0001
+						days = { 7 14 }
+					}
+				}
+			}
+		}
+		else = {
+			ordered_HRT_candidati = {
+				order_by = HRT_imperator_score
+				position = 0
+				save_temporary_scope_as = HRT_new_emperor
+				create_story = HRT_emperor_story
+				if = {
+					limit = {
+						NOT = { has_trait = HRT_emperor }
+					}
+					trigger_event = {
+						id = HRT_italienzug.0001
+						days = { 7 14 }
+					}
+				}
+			}
+		}
+	}
+}
+
+
 # A title is destroyed
 # root = the holder before destruction
 # scope:landed_title = the title that is being destroyed

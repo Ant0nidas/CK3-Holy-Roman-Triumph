@@ -1,0 +1,5 @@
+﻿l_russian:
+ action_max_authority_reached_label: "@empire_icon! You have reached Imperial Authority Limit"
+ action_max_authority_reached: "@empire_icon! You have reached [HRT_imperial_authority|E] Limit"
+ action_max_authority_reached_desc: "Consider enacting an [HRT_imperial_edict|E] or proclaiming an [HRT_imperial_directive|E]."
+ action_max_authority_reached_click: "#i Click to open Authority Window#!"

@@ -249,3 +249,42 @@ HRT.0008 = { # Emperor loses title and holds no kingdom (pre HRE-formation)
 		trigger_event = HRT.0005 # Notification Event
 	}
 }
+
+HRT.0009 = {
+	title = HRT_italienzug.0001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = scope:HRTdeceasedemperor
+				}
+				desc = HRT.0009.desc.a
+			}
+			desc = HRT.0009.desc.b
+		}
+	}
+	theme = crown
+
+	left_portrait = {
+		character = scope:title_recipient
+		animation = ecstasy
+	}
+	
+	trigger = { is_ai = no }
+	
+	immediate = {
+		title:c_aachen.var:HRT_emperor = {
+			save_scope_as = title_recipient
+		}
+		title:c_aachen.var:HRT_deceasedemperor ?= {
+			save_scope_as = HRTdeceasedemperor
+		}
+	}
+
+	option = {
+		name = great_holy_war.0070.a
+		add_internal_flag = dangerous
+		set_player_character = scope:title_recipient
+	}
+	option = { name = great_holy_war.0070.b }
+}

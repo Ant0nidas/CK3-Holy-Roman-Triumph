@@ -1,0 +1,5 @@
+﻿l_spanish:
+ HRT_demand_fealty_interaction: "Demand Fealty to the Empire"
+ HRT_demand_fealty_interaction_desc: "Demand [recipient.GetShortUINameNoTooltip] to acknowledge the supremacy of the Holy Roman Empire and become your [vassal|E]"
+ HRT_demand_fealty_interaction_authority_req: "You need at least #V [EmptyScope.ScriptValue('HRT_demand_fealty_interaction_authority_value')|0]#! [HRT_imperial_authority|E]"
+ HRT_demand_fealty_authority_tt: "[HRT_imperial_authority|E]: #P +[EmptyScope.ScriptValue('HRT_authority_progressbar_value')|0]#!"
