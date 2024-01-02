@@ -584,36 +584,34 @@
 	# ACTIVITY-SPECIFIC PULSES
 	###################
 
-	#on_enter_travel_state = {
-	#	scope:host.current_travel_plan = {
-	#		travel_plan_owner = {
-	#			add_character_flag = forced_knight_armor
-	#		}
-	#		every_entourage_character = {
-	#			limit = { is_male = yes }
-	#			add_character_flag = wear_armor
-	#		}
-	#	}
-	#}
-	#on_start = {
-	#	scope:host.current_travel_plan = {
-	#		travel_plan_owner = {
-	#			add_character_flag = forced_knight_armor
-	#		}
-	#		every_entourage_character = {
-	#			limit = { is_male = yes }
-	#			add_character_flag = wear_armor
-	#		}
-	#	}
-	#}
+	#on_enter_travel_state = { }
+
+	on_start = {
+		set_variable = {
+			name = starting_faith
+			value = scope:host.faith
+		}
+	}
 
 	on_leave_travel_state = {
 		scope:host.current_travel_plan = {
 			travel_plan_owner = {
-				remove_character_flag = forced_knight_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 			every_entourage_character = {
-				remove_character_flag = wear_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 		}
 	}
@@ -621,10 +619,22 @@
 	on_enter_passive_state = {
 		scope:host.current_travel_plan = {
 			travel_plan_owner = {
-				remove_character_flag = forced_knight_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 			every_entourage_character = {
-				remove_character_flag = wear_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 		}
 	}
@@ -655,7 +665,7 @@
 				limit = {
 					is_male = yes
 				}
-				add_character_flag = wear_armor
+				add_character_flag = forced_knight_armor
 			}
 		}
 	}
@@ -982,7 +992,7 @@
 							NOT = {
 								scope:host.location = scope:activity.activity_location
 							}
-							has_character_flag = wear_armor
+							has_character_flag = forced_knight_armor
 						}
 						add_to_list = characters
 					}
@@ -1009,7 +1019,7 @@
 						NOT = {
 							scope:host.location = scope:activity.activity_location
 						}
-						has_character_flag = wear_armor
+						has_character_flag = forced_knight_armor
 					}
 					add_to_list = characters
 				}
@@ -1136,7 +1146,7 @@
 						NOT = {
 							scope:host.location = scope:activity.activity_location
 						}
-						has_character_flag = wear_armor
+						has_character_flag = forced_knight_armor
 					}
 					add_to_list = characters
 				}
@@ -1169,7 +1179,7 @@
 							NOT = {
 								scope:host.location = scope:activity.activity_location
 							}
-							has_character_flag = wear_armor
+							has_character_flag = forced_knight_armor
 						}
 						add_to_list = characters
 					}

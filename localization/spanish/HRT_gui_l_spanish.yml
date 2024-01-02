@@ -67,7 +67,7 @@
  HRT_authority_game_rule_bonus_one_and_a_half_value: "1.5x"
  HRT_authority_game_rule_bonus_twice_value: "2x"
  HRT_authority_edict_modifier: "[HRT_imperial_edict|E] Multiplicator"
- HRT_authority_edict_modifier_value: "[EmptyScope.ScriptValue('HRT_authority_edict_modifier_gui')]"
+ HRT_authority_edict_modifier_value: "[EmptyScope.ScriptValue('HRT_authority_edict_modifier')]"
 
  
  #Tooltips

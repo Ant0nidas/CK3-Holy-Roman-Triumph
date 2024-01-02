@@ -26,7 +26,7 @@
         using = Sound_WindowHide_Standard
 		# Clear Candidati List
 		on_start = "[GetVariableSystem.Set('HRT_window_open', 'no')]"
-		on_start = "[GetScriptedGui('HRT_abort_sgui').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_finish = "[GetScriptedGui('HRT_abort_sgui').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 	}
 
 	container = {
@@ -91,23 +91,29 @@
 					#Imperator
 					HRT_window_special_character = {
 						datacontext = "[GetPlayer.MakeScope.Var('HRT_imperator_gui').GetCharacter]"
-						blockoverride "text" { text = HRT_IMPERATOR}
+						blockoverride "text" { raw_text = HRT_IMPERATOR}
 						visible = "[GetScriptedGui('HRT_imperator_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						#background = {
+						#	texture = "gfx/interface/icons/HRT_laurel_wreath.dds"
+						#}
 					}
 					HRT_no_special_character = {
-						blockoverride "text"	{	text = HRT_IMPERATOR_MISSING}
+						blockoverride "icon" {}
+						blockoverride "text"	{	raw_text = HRT_IMPERATOR_MISSING}
 						visible = "[GetScriptedGui('HRT_missing_imperator_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					}
 					#Expectatus
 					HRT_window_special_character = {
+						blockoverride "icon" {}
 						datacontext = "[GetPlayer.MakeScope.Var('HRT_expectatus_gui').GetCharacter)]"
-						blockoverride "text"    {   text = HRT_EXPECTATUS}
+						blockoverride "text"    {   raw_text = HRT_EXPECTATUS}
 						blockoverride "portrait" {  portrait_head = { parentanchor = hcenter|vcenter position = { -13 3 } } } 
 						HRT_window_imperator_score      = {position = { 40 0 }}
 						visible = "[GetScriptedGui('HRT_expectatus_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					}
 					HRT_no_special_character = {
-						blockoverride "text"	{	text = HRT_EXPECTATUS_MISSING}
+						blockoverride "icon" {}
+						blockoverride "text"	{	raw_text = HRT_EXPECTATUS_MISSING}
 						visible = "[GetScriptedGui('HRT_missing_expectatus_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					}
 				}
@@ -523,6 +529,7 @@
 
 	container = {
 		name = HRT_authority_buttons
+		visible = "[GetScriptedGui('HRT_imperator_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		icon = {
 			visible = "[EqualTo_CFixedPoint(GetPlayer.MakeScope.ScriptValue('HRT_authority_progressbar_value'),'(CFixedPoint)100')]"
 			size = { 57 46 }
@@ -582,7 +589,7 @@
 		HRT_button_authority = {
 			name = "HRT_button_authority_10"
 			visible = "[EqualTo_CFixedPoint(GetPlayer.MakeScope.ScriptValue('HRT_authority_progressbar_value'),'(CFixedPoint)100')]"
-			texture = "gfx/interface/HRT/Authority/HRT_authority_10.dds"	
+			texture = "gfx/interface/HRT/Authority/HRT_authority_10.dds"
 			glow = {
 				glow_radius = 6
 				using = Glow_Standard
@@ -595,6 +602,7 @@
 		position = { 378 330 }
 		text_multi = {
 			text = "HRT_AUTHORITY_MONTHLY_CHANGE"
+			visible = "[GetScriptedGui('HRT_imperator_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			fontsize = 18
 			autoresize = yes
 			using = Font_Size_Big
@@ -606,6 +614,7 @@
 		position = { 378 360 }
 		text_label_center = {
 			text = "[GetPlayer.MakeScope.ScriptValue('HRT_authority_change_value_gui')|L=+]"
+			visible = "[GetScriptedGui('HRT_imperator_sgui').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			fontsize = 24
 			using = Font_Size_Big
 			autoresize = yes
@@ -657,6 +666,20 @@
 			default_format = "#weak"
 			autoresize = yes
 			max_width = 250
+		}
+	}
+
+	#Divider
+	hbox = {
+		position = { -134 323 }
+		divider_light = {
+			size = { 5 130 }
+		}
+	}
+	hbox = {
+		position = { 43 323 }
+		divider_light = {
+			size = { 5 130 }
 		}
 	}
 }

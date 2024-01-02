@@ -24,9 +24,9 @@ HRT_edicts.0001 = { # Edict of Legal Unification (Era 2)
 	}
 
 	trigger = {
-		var:HRT_authority >= 40
-		prestige > major_prestige_value
 		HRT_is_emperor_trigger = yes
+		var:HRT_authority >= 40
+		prestige > major_prestige_value		
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_legal_unification_var }
@@ -104,9 +104,10 @@ HRT_edicts.0002 = { # Imperial Decree of Chivalric Excellence (Era 3)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
+		has_variable = HRT_authority
 		var:HRT_authority >= 100
 		prestige >= massive_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_chivalric_excellence_var }
@@ -181,10 +182,11 @@ HRT_edicts.0003 = { # Diplomatic Corps Activation Edict (Era 4)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
+		has_variable = HRT_authority
 		var:HRT_authority >= 60
 		prestige >= medium_prestige_value
 		piety >= medium_piety_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_diplomatic_corps_var }
@@ -269,9 +271,9 @@ HRT_edicts.0004 = { # Consular Taxation Directive (Era 2)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 80
 		prestige >= major_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_consular_taxation_var }
@@ -346,9 +348,9 @@ HRT_edicts.0005 = { # Imperial Levy Conscription Order (Era 4)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 100
 		prestige >= massive_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_levy_conscription_var }
@@ -423,9 +425,9 @@ HRT_edicts.0006 = { # Edict of Urban Rights and Privileges (Era 4)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 75
 		prestige >= major_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_urban_rights_var }
@@ -517,9 +519,9 @@ HRT_edicts.0007 = { # Border Defense Temporary Directive (Era 4)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 100
 		prestige >= massive_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_border_defense_var }
@@ -613,10 +615,10 @@ HRT_edicts.0008 = { # Edict of Scholastic Advancement (Era 3)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 50
 		prestige >= minor_prestige_value
 		piety >= major_piety_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_scholastic_advancement_var }
@@ -698,9 +700,9 @@ HRT_edicts.0009 = { # Edict of Imperial Works (Era 3)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 50
 		prestige >= major_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_imperial_works_var }
@@ -784,9 +786,9 @@ HRT_edicts.0010 = { # Edict of Ecclesiastical Patronage (Era 3)
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 40
 		piety >= major_piety_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			title:c_aachen = { has_variable = HRT_edict_ecclesiastical_patronage_var }
@@ -975,9 +977,9 @@ HRT_edicts.1001 = {
 	}
 
 	trigger = {
+		HRT_is_emperor_trigger = yes
 		var:HRT_authority >= 60
 		prestige >= major_prestige_value
-		HRT_is_emperor_trigger = yes
 		NOR = {
 			has_character_flag = HRT_edict_open
 			has_variable = HRT_edict_proclaim_directive
@@ -1161,9 +1163,9 @@ HRT_edicts.1001 = {
 #	}
 #
 #	trigger = {
+#		HRT_is_emperor_trigger = yes
 #		var:HRT_authority >= 10
 #		prestige >= major_prestige_value
-#		HRT_is_emperor_trigger = yes
 #		NOR = {
 #			has_character_flag = HRT_edict_open
 #			#has_variable = HRT_edict_enact_resolution

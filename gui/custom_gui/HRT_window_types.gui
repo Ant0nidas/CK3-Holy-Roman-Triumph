@@ -2,7 +2,14 @@ types HRT_stuff {
 type HRT_window_special_character = widget { #For showing the Imperator and Expectatus
     allow_outside = yes
     size = {150 213}
-    
+    block "icon" {
+		icon = {
+			texture = "gfx/interface/icons/HRT_laurel_wreath.dds"
+			size = { 180 180 }
+			position = { -17 25 }
+			alpha = 0.7
+		}
+	}
     icon = {
         parentanchor = hcenter|top
         texture = "gfx/interface/HRT/papacy_nameplate_large_bg.dds"
@@ -12,7 +19,7 @@ type HRT_window_special_character = widget { #For showing the Imperator and Expe
             parentanchor = hcenter|vcenter
             default_format = "#light_background"
             using = Font_Type_Flavor
-            block "fontsize" { fontsize = 26 }
+            block "fontsize" { fontsize = 24 }
             position = {0 -4}
         }
     }
@@ -44,7 +51,7 @@ type HRT_window_candidati = widget { # Lists character's name and portrait
                 parentanchor = hcenter|vcenter
                 default_format = "#light_background"
                 using = Font_Type_Flavor
-                fontsize = 24
+                fontsize = 22
                 position = {0 -4}
             }
         }
