@@ -4,3 +4,8 @@
  HRT_emperor_desc: "This character has been recognized and formally crowned as the rightful ruler of the Holy Roman Empire."
  HRT_emperor_pope_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been recognized and formally crowned by [ROOT.GetCharacter.GetFaith.ReligiousHeadName] [ROOT.Char.MakeScope.Var('HRT_crowned_by').Char.GetFirstName] as the rightful ruler of the Holy Roman Empire."
  HRT_emperor_character_desc: "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been recognized and formally crowned by the [ROOT.GetCharacter.GetFaith.ReligiousHeadName] as the rightful ruler of the Holy Roman Empire."
+
+ trait_HRT_decline_succession: "Declines Succession"
+ trait_HRT_decline_succession_desc: "This character refuses a possible succession to the Holy Roman Empire."
+ trait_HRT_decline_succession_character_desc: "[ROOT.GetCharacter.GetTitledFirstNameNoTooltip] won't accept a possible succession to the Holy Roman Empire."
+ #trait_HRT_decline_succession_tooltip:0 "Declines succession to the Holy Roman Empire."

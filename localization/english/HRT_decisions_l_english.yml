@@ -1,0 +1,9 @@
+﻿l_english:
+ HRT_decline_succession_decision:0 "Decline Succession"
+ HRT_decline_succession_decision_desc:0 "This decision grants your character a trait that makes them unavailable for succession to the Holy Roman Empire."
+ HRT_decline_succession_decision_confirm:0 "Just leave me at peace!"
+ HRT_decline_succession_decision_tooltip:0 "Decline succession to the Holy Roman Empire."
+ HRT_accept_succession_decision:0 "Accept Succession"
+ HRT_accept_succession_decision_desc:0 "This decision makes your character lose the trait that makes them unavailable for succession to the Holy Roman Empire."
+ HRT_accept_succession_decision_confirm:0 "I am worthy!"
+ HRT_accept_succession_decision_tooltip:0 "Stop declining succession to the Holy Roman Empire."

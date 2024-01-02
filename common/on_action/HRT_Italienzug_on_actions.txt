@@ -18,7 +18,7 @@ HRT_on_travel_plan_start = {
 			}
 			every_entourage_character = {
 				limit = { is_male = yes }
-				add_character_flag = wear_armor
+				add_character_flag = forced_knight_armor
 			}
 		}
 	}
@@ -40,10 +40,22 @@ HRT_on_travel_plan_complete = {
 	effect = {
 		current_travel_plan = {
 			travel_plan_owner = {
-				remove_character_flag = forced_knight_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 			every_entourage_character = {
-				remove_character_flag = wear_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 		}
 	}
@@ -66,10 +78,22 @@ HRT_on_travel_plan_abort = {
 	effect = {
 		current_travel_plan = {
 			travel_plan_owner = {
-				remove_character_flag = forced_knight_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = forced_knight_armor
+					}
+					remove_character_flag = forced_knight_armor
+				}
 			}
 			every_entourage_character = {
-				remove_character_flag = wear_armor
+				if = {
+					limit = {
+						is_alive = yes
+						has_variable = wear_armor
+					}
+					remove_character_flag = wear_armor
+				}
 			}
 		}
 	}

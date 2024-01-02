@@ -1,6 +1,6 @@
 ﻿l_english:
  HRT_WINDOW_NAME: "[Character.GetFullName]"
- HRT_IMPERATOR: "Imperator"
+ HRT_IMPERATOR: "Romanorum Imperator Augustus"
  HRT_IMPERATOR_MISSING: "Interregnum"
  HRT_EXPECTATUS: "Expectatus"
  HRT_EXPECTATUS_MISSING: "No Expectatus"
@@ -44,30 +44,36 @@
  # Authority breakdown
  HRT_authority_change: "[HRT_imperial_authority_change|E]"
  HRT_authority_constrained_reach_malus: "[HRT_constrained_reach|E]"
- HRT_authority_constrained_reach_malus_value: "#N -20%#
- HRT_authority_prestige_bonus: "[prestige_i] [prestige_level|E] ([Character.MakeScope.Var('HRT_authority_prestige_gui').GetValue|0])"
+ HRT_authority_constrained_reach_malus_value: "#N -20%#!"
+ HRT_authority_prestige_bonus: "[prestige_i] [prestige|E] ([Character.MakeScope.Var('HRT_authority_prestige_gui').GetValue|0])"
  HRT_authority_dread_bonus: "[dread|E] ([Character.MakeScope.Var('HRT_authority_dread_gui').GetValue|0])"
  HRT_authority_years_reigned_bonus: "Years Reigned ([Character.MakeScope.Var('HRT_authority_years_reigned_gui').GetValue|0])"
  HRT_authority_vassal_bonus: "[HRT_vassal_count|E]"
- HRT_authority_held_castle_bonus: "Held [castles|E]"
+ #HRT_authority_held_castle_bonus: "Held [castles|E]"
  HRT_authority_ally_bonus: "[alliances|E]"
- HRT_authority_artifact_bonus: "[artifacts|E]"
+ HRT_authority_artifact_bonus: "Illustrious [artifacts|E]"
  HRT_authority_missing_reichskrone_malus: "Missing Reichskrone"
  HRT_authority_grand_tour_bonus: "Holding a [GetActivityType('activity_tour').GetName]"
  #HRT_candidatus_event_bonus: "Recent Events"
  HRT_authority_loss_waged_vassal_wars_malus: "[vassals|E] Waging War"
- HRT_authority_infidel_malus: "Infidel [rulers|E] in Empire"
+ HRT_authority_infidel_malus: "Infidel [vassals|E]"
  HRT_authority_unheld_heartlands_malus: "Unheld [HRT_imperial_territory|E]"
  HRT_authority_uncrowned_malus: "[HRT_uncrowned|E]"
- HRT_authority_uncrowned_malus_value: "#N -50%#
+ HRT_authority_uncrowned_malus_value: "#N -50%#!"
+ HRT_authority_cardinals_bonus: "[vassal|E] [cardinals|E]"
+ HRT_authority_papal_investiture_malus: "[papal_investiture|E]"
+ HRT_authority_papal_investiture_malus_value: "#N -5%#!"
+ HRT_authority_free_investiture_bonus: "[free_investiture|E]"
+ HRT_authority_free_investiture_bonus_value: "#P 10%#!"
+ HRT_authority_excommunicated_malus: "Is [excommunicated|E]"
  HRT_authority_imprisoned_malus: "Is [imprisoned|E]"
  HRT_authority_child_malus: "Is a Child"
- HRT_authority_child_malus_value: "#N -100%#
+ HRT_authority_child_malus_value: "#N -100%#!"
  HRT_authority_game_rule_bonus: "Game Rule Bonus"
  HRT_authority_game_rule_bonus_one_and_a_half_value: "1.5x"
  HRT_authority_game_rule_bonus_twice_value: "2x"
  HRT_authority_edict_modifier: "[HRT_imperial_edict|E] Multiplicator"
- HRT_authority_edict_modifier_value: "[EmptyScope.ScriptValue('HRT_authority_edict_modifier_gui')]"
+ HRT_authority_edict_modifier_value: "[EmptyScope.ScriptValue('HRT_authority_edict_modifier')]"
 
  
  #Tooltips

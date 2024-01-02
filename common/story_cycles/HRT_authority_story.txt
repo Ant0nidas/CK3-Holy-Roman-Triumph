@@ -9,11 +9,80 @@
 					value = scope:story.story_owner
 				}
 			}
-			HRT_emperor_story_setup_effect = yes
+			set_variable = {
+				name = HRT_authority
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_prestige
+				value = prestige
+			}
+			set_variable = {
+				name = HRT_authority_dread
+				value = dread
+			}
+			set_variable = {
+				name = HRT_authority_years_reigned
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_vassals_var
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_vassals_bonus_var
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_vassals_war_var
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_infidels_var
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_unheld_heartlands
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_military_strength
+				value = max_military_strength
+			}
+			set_variable = {
+				name = HRT_authority_ally_military_strength
+				value = 0
+			}
+			set_variable = {
+				name = HRT_authority_artifacts
+				value = 0
+			}
+			if = {
+				limit = { exists = global_var:Trinity_is_loaded }
+				set_variable = {
+					name = HRT_authority_cardinals
+					value = 0
+				}
+			}
+			
+			#Become Independent
+			if = {
+				limit = { is_independent_ruler = no }
+				create_title_and_vassal_change = {
+					type = independency
+					save_scope_as = change
+					add_claim_on_loss = yes
+				}
+				becomes_independent = {
+					change = scope:change
+				}
+				resolve_title_and_vassal_change = scope:change
+			}
 		}
 	}
 	
 	on_owner_death = {
+		HRT_close_window = yes
 		title:c_aachen = {
 			set_variable = {
 				name = HRT_deceasedemperor
@@ -21,13 +90,19 @@
 			}
 		}
 		story_owner = {
+			primary_heir ?= {
+				set_variable = {
+					name = HRT_prince_var
+					value = yes
+				}
+			}
 			HRT_initialize_succession = yes
 		}
-		HRT_close_window = yes
 		end_story = yes
 	}
 
 	on_end = {
+		remove_variable = HRT_authority
 		remove_variable = HRT_authority_years_reigned
 		remove_variable = HRT_authority_vassals_var
 		remove_variable = HRT_authority_vassals_bonus_var
@@ -41,18 +116,6 @@
 		triggered_effect = {
 			trigger = {
 				always = yes
-				#story_owner = {
-				#	NOR = {
-				#		AND = {
-				#			HRT_authority_progressbar_value = 0
-				#			HRT_authority_change_value < 0
-				#		}
-				#		AND = {
-				#			HRT_authority_progressbar_value = 100
-				#			HRT_authority_change_value > 0
-				#		}
-				#	}
-				#}
 			}
 			effect = {
 				story_owner = {
@@ -77,7 +140,34 @@
 						name = HRT_authority_unheld_heartlands
 						multiply = 0
 					}
+					change_variable = {
+						name = HRT_authority_ally_military_strength
+						multiply = 0
+					}
+					change_variable = {
+						name = HRT_authority_artifacts
+						multiply = 0
+					}
+					if = {
+						limit = { exists = var:HRT_authority_cardinals }
+						change_variable = {
+							name = HRT_authority_cardinals
+							multiply = 0
+						}
+					}
 
+
+					#Prestige Bonus
+					set_variable = {
+						name = HRT_authority_prestige
+						value = prestige
+					}
+					#Dread Bonus
+					set_variable = {
+						name = HRT_authority_dread
+						value = dread
+					}
+					#Vassal Values
 					every_vassal = {
 						#Total Vassal Count
 						prev = {
@@ -120,13 +210,12 @@
 							limit = { NOT = { faith = prev.faith } }
 							prev = {
 								change_variable = {
-									name = HRT_authority_vassals_bonus_var
-									add = authority_gain_per_vassal_duchy_bonus
+									name = HRT_authority_infidels_var
+									add = 1
 								}
 							}
 						}
 					}
-					
 					#Unheld Heartlands Malus
 					every_county_in_region = {
 						region = HRT_core_territory
@@ -142,6 +231,44 @@
 							}
 						}
 					}
+					#Ally Bonus
+					set_variable = {
+						name = HRT_authority_military_strength
+						value = max_military_strength
+					}
+					every_ally = {
+						save_temporary_scope_as = ally
+						prev = {
+							change_variable = {
+								name = HRT_authority_ally_military_strength
+								add = scope:ally.max_military_strength
+							}
+						}
+					}
+					#Artifact Bonus
+					every_character_artifact = {
+						limit = { rarity = illustrious }
+						prev = {
+							change_variable = {
+								name = HRT_authority_artifacts
+								add = 0.15
+							}
+						}
+					}
+					#Cardinals Bonus
+					if = {
+						limit = { exists = var:HRT_authority_cardinals }
+						every_living_cardinal = {
+							limit = { is_vassal_or_below_of = prev }
+							prev = {
+								change_variable = {
+									name = HRT_authority_cardinals
+									add = 1
+								}
+							}
+						}
+					}
+
 
 					#Prevent exceeding authority range (0-100)
 					if = {
@@ -166,6 +293,31 @@
 						}
 					}
 				}
+
+
+				#Pope opinion of candidati parked here to prevent errors, sorry
+				every_HRT_candidati = {
+					save_scope_as = HRT_candidatus
+					faith:catholic.religious_head ?= {
+						if = {
+							limit = {
+								save_temporary_opinion_value_as = {
+									name = popinion
+									target = scope:HRT_candidatus
+								}
+								exists = scope:popinion
+							}
+							scope:HRT_candidatus = {
+								set_variable = {
+									name = HRT_popinion
+									value = scope:popinion
+								}
+							}
+						}
+					}
+				}
+
+
 			}
 		}
 	}

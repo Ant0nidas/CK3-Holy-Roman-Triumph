@@ -3,7 +3,7 @@
  game_concept_HRT_imperial_authority_desc: "Imperial Authority represents the amount of control the Emperor exerts over his [vassals|E]. Authority is needed to issue [HRT_imperial_edicts|E] and proclaim [HRT_imperial_directives|E] within the Holy Roman Empire."
  
  game_concept_HRT_imperial_authority_change: "Monthly Authority Change"
- game_concept_HRT_imperial_authority_change_desc: "The rate at which you gain or lose [HRT_imperial_authority|E]. Capped at +5 and -10 per month before [HRT_imperial_edict|E] effects."
+ game_concept_HRT_imperial_authority_change_desc: "The rate at which you gain or lose [HRT_imperial_authority|E]. Capped at +5 and -5 per month before [HRT_imperial_edict|E] effects."
  
  game_concept_HRT_imperial_territory: "Imperial Territory"
  game_concept_HRT_imperial_territory_desc: "The Imperial Core Territories include the regions of #bold West Germania#! (including Saxony, Frisia, Lotharingia, Bavaria, East Francia, Bohemia and Pomerania), #bold Northern Italy#! and #bold Burgundy#!."

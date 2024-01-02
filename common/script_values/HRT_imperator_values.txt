@@ -11,7 +11,8 @@ emperor_score_per_gold 									= 0.2
 emperor_score_per_age 									= 2
 emperor_score_italy 									= 500
 emperor_score_culture 									= -200
-emperor_score_per_popinion 								= 3.5
+emperor_score_per_popinion_positive						= 2
+emperor_score_per_popinion_negative						= 3.5
 dynasty_prestige_per_emperor_score	 					= 40
 
 # Secular power parameters
@@ -29,15 +30,15 @@ emperor_is_child										= -300
 
 emperor_score_pweakhook									= 100
 emperor_score_pstronghook								= 200
-emperor_score_karling									= 150
-emperor_score_imperial_dynasty							= 200
+emperor_score_karling									= 100
+emperor_score_imperial_dynasty							= 100
 emperor_score_territory									= 2
 emperor_score_military									= 0.05
 emperor_score_is_heir									= 200
 emperor_score_has_heir									= 50
 emperor_score_wrong_faith								= -150
 emperor_has_serious_disease								= -300
-emperor_is_criminal										= -300
+emperor_is_criminal										= -200
 
 # Summary values
 HRT_imperator_score = {
@@ -108,28 +109,34 @@ HRT_imperator_score = {
 
 HRT_imperator_score_prince = {
 	value = 0
-	add = emperor_prestige_bonus
-	add = emperor_piety_bonus
-	add = emperor_gold_bonus
-	add = emperor_age_bonus
-	add = emperor_dynasty_bonus
-	add = emperor_location_bonus
-	add = emperor_popinion_bonus
-	add = emperor_secular_power_bonus
-	#add = emperor_recent_event_modifier
-	add = emperor_too_old_malus
-	add = emperor_culture_malus
-	add = emperor_karling_dynasty_bonus
-	add = emperor_is_imperial_dynasty_bonus
-	add = emperor_phook_bonus
-	add = emperor_territory_bonus
-	add = emperor_military_bonus
-	add = emperor_is_heir_bonus
-	add = emperor_has_heir_bonus
-	add = emperor_has_no_heir_malus
-	add = emperor_has_wrong_faith_malus
-	add = emperor_has_serious_disease_malus
-	add = emperor_is_criminal_malus
+	if = {
+		limit = {
+			exists = this # To not log errors when iterating through members of an empty list
+			is_alive = yes
+		}
+		add = emperor_prestige_bonus
+		add = emperor_piety_bonus
+		add = emperor_gold_bonus
+		add = emperor_age_bonus
+		add = emperor_dynasty_bonus
+		add = emperor_location_bonus
+		add = emperor_popinion_bonus
+		add = emperor_secular_power_bonus
+		#add = emperor_recent_event_modifier
+		add = emperor_too_old_malus
+		add = emperor_culture_malus
+		add = emperor_karling_dynasty_bonus
+		add = emperor_is_imperial_dynasty_bonus
+		add = emperor_phook_bonus
+		add = emperor_territory_bonus
+		add = emperor_military_bonus
+		add = emperor_is_heir_bonus
+		add = emperor_has_heir_bonus
+		add = emperor_has_no_heir_malus
+		add = emperor_has_wrong_faith_malus
+		add = emperor_has_serious_disease_malus
+		add = emperor_is_criminal_malus
+	}
 }
 
 # Subterms
@@ -181,17 +188,21 @@ emperor_culture_malus = {
 }
 emperor_popinion_bonus = {
 	value = 0
-		faith:catholic.religious_head = {
-		if = {
-			limit = {
-				save_temporary_opinion_value_as = {
-					name = popinion
-					target = root
-				}
-				exists = scope:popinion
-			}
-			add = scope:popinion  multiply = emperor_score_per_popinion
+	if = {
+		limit = {
+			has_variable = HRT_popinion
+			var:HRT_popinion >= 0
 		}
+		add = var:HRT_popinion
+		multiply = emperor_score_per_popinion_positive
+	}
+	else_if = {
+		limit = {
+			has_variable = HRT_popinion
+			var:HRT_popinion < 0
+		}
+		add = var:HRT_popinion
+		multiply = emperor_score_per_popinion_negative
 	}
 }
 emperor_phook_bonus = {

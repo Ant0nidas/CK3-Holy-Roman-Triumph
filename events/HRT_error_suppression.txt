@@ -8,5 +8,6 @@ HRT_error_suppression.1 = {
         fix_variable_error = {ERROR = HRT_authority_prestige_gui}
         fix_variable_error = {ERROR = HRT_authority_dread_gui}
         fix_variable_error = {ERROR = HRT_authority_years_reigned_gui}
+		fix_variable_error = {ERROR = Trinity_is_loaded}
     }
 }

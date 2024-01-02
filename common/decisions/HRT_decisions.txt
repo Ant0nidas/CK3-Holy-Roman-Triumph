@@ -1,0 +1,46 @@
+﻿HRT_decline_succession_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	major = no
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		NOT = { exists = title:e_hre.holder }
+		NOT = { has_trait = HRT_decline_succession }
+	}
+
+	is_valid = {
+		NOT = { has_trait = HRT_decline_succession }
+	}
+
+	effect = {
+		add_trait = HRT_decline_succession
+	}
+
+	ai_potential = {
+		always = no
+	}
+}
+
+HRT_accept_succession_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	major = no
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		has_trait = HRT_decline_succession
+	}
+
+	is_valid = {
+		has_trait = HRT_decline_succession
+	}
+
+	effect = {
+		remove_trait = HRT_decline_succession
+	}
+
+	ai_potential = {
+		always = no
+	}
+}

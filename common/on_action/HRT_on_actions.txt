@@ -139,9 +139,26 @@ HRT_yearly_maintenance_pulse = {
 				}
 			}
 		}
+		HRT_close_window = yes
 	}
 }
 
+# character just about to die in root scope
+on_death = {
+	on_actions = {
+		HRT_on_death
+	}
+}
+
+HRT_on_death = {
+	trigger = {
+		is_ai = no
+		exists = global_var:HRT_window_is_open
+	}
+	effect = {
+		HRT_close_window = yes
+	}
+}
 
 # A title is destroyed
 # root = the holder before destruction
